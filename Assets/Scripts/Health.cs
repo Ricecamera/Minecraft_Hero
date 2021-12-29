@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    PlayerController player;
+    Player player;
     public const int fullHealth = 3;
     public RawImage[] hearts;
 
-    void Start()
+    public void Start()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         for (int i = 0 ; i < hearts.Length; ++i)
         {

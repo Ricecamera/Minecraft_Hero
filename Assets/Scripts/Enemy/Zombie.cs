@@ -7,7 +7,7 @@ public class Zombie : MonoBehaviour
 {
     
     private GameObject player;
-    private PlayerController _p_controller;
+    private Player playeScript;
     private GameManager gameManager;
     public LayerMask whatIsGround, whatIsPlayer;
     public ParticleSystem blood;
@@ -36,7 +36,7 @@ public class Zombie : MonoBehaviour
     {
         goal = GameObject.Find("Village Entry").transform;
         player = GameObject.Find("Player");
-        _p_controller = player.GetComponent<PlayerController>();
+        playeScript = player.GetComponent<Player>();
         zombie_audioSource = GetComponent<AudioSource>();
         zombie_audioSource.PlayOneShot(moanSound);
         //agent = GetComponent<NavMeshAgent>();
@@ -48,8 +48,8 @@ public class Zombie : MonoBehaviour
     {
         if (gameManager.isGameOver) return;
         //Check for sight and attack range
-        playerInSightRange = (_p_controller.isDead == false) && Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = (_p_controller.isDead == false) && Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInSightRange = (playeScript.isDead == false) && Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = (playeScript.isDead == false) && Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
@@ -85,7 +85,7 @@ public class Zombie : MonoBehaviour
             //Attack code here
             Rigidbody playerRb = player.GetComponent<Rigidbody>();
             playerRb.AddForce(transform.forward * pushFroce, ForceMode.Impulse);
-            _p_controller.TakeDamge(atk);
+            playeScript.TakeDamge(atk);
             //End of attack code
 
             alreadyAttacked = true;
