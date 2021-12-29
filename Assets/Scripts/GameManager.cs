@@ -11,8 +11,6 @@ public class Wave
     public string waveName;
     public int numberOfEnemies;
     public float spawnInterval;
-
-    //public GameObject[] enemytype;
 }
 public class GameManager : MonoBehaviour
 {
@@ -31,7 +29,6 @@ public class GameManager : MonoBehaviour
     public bool isGameOver = false;
 
     // UI
-    // public GameObject titleScreen;
     public TextMeshProUGUI lifeText;
     public TextMeshProUGUI gameOverText;
 
