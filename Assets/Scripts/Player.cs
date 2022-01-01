@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     // controller
     private PlayerController controller;
+    private GunController gunController;
     private InputHandler _input;
     //private GameManager gameManager;
   
@@ -34,10 +35,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        // get a reference of gameManger to check games state
-        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
         controller = GetComponent<PlayerController>();
+        gunController = GetComponent<GunController>();
         _input = GetComponent<InputHandler>();
         sceneCamera = Camera.main;
 
@@ -50,33 +49,27 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        //if (gameManager.isGameOver)
-        //{
-        //    controller.Reset();
-        //    return;
-        //}
-
         // Change 2d input vector to 3d vector;
-        if (!isDead)
+        Vector3 moveDirection = new Vector3(_input.inputVector.x, 0, _input.inputVector.y);
+        Vector3 moveVelocity = moveDirection.normalized * movementSpeed;
+        controller.Move(moveVelocity);
+
+        Ray ray = sceneCamera.ScreenPointToRay(_input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+        // Find Mouse position and make player look at that position
+        if (groundPlane.Raycast(ray, out float rayDistance))
         {
-            var targetVector = new Vector3(_input.inputVector.x, 0, _input.inputVector.y);
-            var moveVelocity = targetVector.normalized * movementSpeed;
-            controller.Move(moveVelocity);
+            var hitpoint = ray.GetPoint(rayDistance);
 
-            Ray ray = sceneCamera.ScreenPointToRay(_input.mousePosition);
-            Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-
-            // Find Mouse position and make player look at that position
-            if (groundPlane.Raycast(ray, out float rayDistance))
-            {
-                var hitpoint = ray.GetPoint(rayDistance);
-
-                //Debug.DrawRay(ray.origin,ray.direction * 100,Color.red);
-                controller.LookAt(hitpoint);
-
-            }
+            //Debug.DrawRay(ray.origin,ray.direction * 100,Color.red);
+            controller.LookAt(hitpoint);
         }
 
+        // Fire a gun
+        if (Input.GetButton("Fire1")) {
+            gunController.Shoot();
+        }
     }
 
     public void TakeDamge(int damage)
@@ -96,17 +89,5 @@ public class Player : MonoBehaviour
         isDead = true;
         deathParticle.Play();
         playerAnim.SetBool("Death_b", true);
-        //StartCoroutine(Respawn());
-
     }
-
-    //ienumerator respawn()
-    //{
-    //    yield return new waitforseconds(2.2f);
-    //    health = 3;
-    //    playerrb.rotation = quaternion.identity;
-    //    transform.position = respawnpos.position;
-    //    playeranim.setbool("death_b", false);
-    //    isdead = false;
-    //}
 }

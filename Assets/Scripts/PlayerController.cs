@@ -8,35 +8,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private Rigidbody myRigidbody;
 
-    [SerializeField]
-    private float xBound = 26.6f;
-
-    [SerializeField]
-    private float zBound = 15.0f;
-
-    private Vector3 CheckOutofBound(Vector3 targetPosition)
-    {
-        if (targetPosition.x > xBound)
-        {
-            targetPosition.x = xBound;
-        }
-        else if (targetPosition.x < -xBound)
-        {
-            targetPosition.x = -xBound;
-        }
-
-        if (targetPosition.z > zBound)
-        {
-            targetPosition.z = zBound;
-        }
-        else if (targetPosition.z < -zBound)
-        {
-            targetPosition.z = -zBound;
-        }
-
-        return targetPosition;
-    }
-
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
@@ -47,6 +18,26 @@ public class PlayerController : MonoBehaviour
         var tragetPosition = myRigidbody.position + this.velocity * Time.fixedDeltaTime;
         tragetPosition = CheckOutofBound(tragetPosition);
         myRigidbody.MovePosition(tragetPosition);
+    }
+
+    private Vector3 CheckOutofBound(Vector3 targetPosition) {
+        float xBound = CameraManager.instance.Bound.x;
+        float zBound = CameraManager.instance.Bound.z;
+        if (targetPosition.x > xBound) {
+            targetPosition.x = xBound;
+        }
+        else if (targetPosition.x < -xBound) {
+            targetPosition.x = -xBound;
+        }
+
+        if (targetPosition.z > zBound) {
+            targetPosition.z = zBound;
+        }
+        else if (targetPosition.z < -zBound) {
+            targetPosition.z = -zBound;
+        }
+
+        return targetPosition;
     }
 
     public void Move(Vector3 velocity)
