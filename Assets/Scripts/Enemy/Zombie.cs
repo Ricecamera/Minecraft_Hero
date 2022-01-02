@@ -195,7 +195,6 @@ public class Zombie : LivingEntity {
         if (NavMesh.SamplePosition(randPosition, out NavMeshHit navHit, dist, 1)) {
             finalPosition = navHit.position;
         }
-        print(finalPosition);
         return finalPosition;
     }
 

@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
 
     public Vector3 Bound {
         get {
-            return playArea.bounds.size / 2;
+            return (playArea.bounds.size - new Vector3(2, 0, 2))/ 2;
         }
     }
 

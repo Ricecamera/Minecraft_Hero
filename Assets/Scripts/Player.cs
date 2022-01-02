@@ -11,7 +11,10 @@ public class Player : LivingEntity {
     private Camera sceneCamera;
 
     // Player State
+    private bool isInvincible = false;
+
     public float movementSpeed;
+    public float invicibleTime = 3f;
 
     // Particle effects
     public ParticleSystem deathParticle;
@@ -35,6 +38,7 @@ public class Player : LivingEntity {
 
         playerAnim = playerAvatar.GetComponent<Animator>();
         p_audiosource = GetComponent<AudioSource>();
+        StartCoroutine(SetInvincible());
     }
 
     // Update is called once per frame
@@ -64,8 +68,26 @@ public class Player : LivingEntity {
         }
     }
 
+    IEnumerator SetInvincible() {
+        // To Do: trigger invincible effect
+        isInvincible = true;
+        yield return new WaitForSeconds(invicibleTime);
+        isInvincible = false;
+    }
+
     public override void Die() {
         playerAnim.SetBool("Death_b", true);
         base.Die();
+    }
+
+    public new void TakeDamage(float damage) {
+        if (!isInvincible) {
+            health -= damage;
+            StartCoroutine(SetInvincible());
+        }
+        
+        if (health <= 0 && !dead) {
+            Die();
+        }
     }
 }

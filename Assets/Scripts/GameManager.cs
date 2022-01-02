@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 [System.Serializable]
 public class Wave
@@ -37,20 +38,29 @@ public class Wave
 public class GameManager : MonoBehaviour
 {
     private static int MAX_PLAYER_LIFE = 10;
+    private static int MAX_AIRDROPS = 5;
+    private static float AIRDROP_STARTING_Y = 50f;
+
     public static GameManager instance = null;    // static instance of GameManager which allows it to be accessed by any other script.
 
-    private float playerSpawnDelay = 3f;
     // Wave involving parameter;
     private Wave currentWave;
     private int enemiesRemainingToSpawn;
     private int enemiesRemainingAlive;
 
+    private int currentAirDrop = 0;
+
+    // Object References
+    public Board boardManager;
     public Transform[] enemySpawnPoint;
     public Zombie zombiePrefab;
     public Player playerPrefab;
+    public GameObject boxPrefab;
 
-    // Game State
+    // Gameplay
     public int playerLife = 3;
+    public float playerSpawnDelay = 3f;
+    public float airDropSpawnTime = 5f;
     public int level = 0;
     public bool isGameOver = false;
 
@@ -75,7 +85,8 @@ public class GameManager : MonoBehaviour
         if (OnPlayerSpawn == null) {
             OnPlayerSpawn = new UnityEvent();
         }
-        NextWave();
+        //NextWave();
+        StartCoroutine(SpawnAirDrop());
     }
 
     void Update()
@@ -83,7 +94,6 @@ public class GameManager : MonoBehaviour
         if (isGameOver)
         {
             //gameOverText.gameObject.SetActive(true);
-            Debug.Log("Game Over");
             return;
         }
     }
@@ -155,6 +165,27 @@ public class GameManager : MonoBehaviour
     IEnumerator SpawnPlayer() {
         yield return new WaitForSeconds(playerSpawnDelay);
         OnPlayerSpawn?.Invoke();
-        Instantiate(playerPrefab, GetRandomPosition(), Quaternion.identity);
+        Player playerEntity = Instantiate(playerPrefab, GetRandomPosition(), Quaternion.identity);
+        playerEntity.OnDeath.AddListener(OnPlayerDeath);
+    }
+
+    IEnumerator SpawnAirDrop() {
+        // Prevent from spawning an airdrop on game starting
+        yield return new WaitForSeconds(airDropSpawnTime * 2);
+
+        while (!isGameOver) {
+            int randomIndex = Random.Range(0, boardManager.gridPositions.Count);
+            Board.Grid currentGrid = boardManager.gridPositions[randomIndex];
+
+            if (currentGrid.isVacant && currentAirDrop < MAX_AIRDROPS) {
+                currentGrid.isVacant = false;
+                Vector3 spawnPos = new Vector3(currentGrid.Position.x, AIRDROP_STARTING_Y, currentGrid.Position.y);
+                Instantiate(boxPrefab, spawnPos, Quaternion.identity);
+                currentAirDrop++;
+            }
+            yield return new WaitForSeconds(airDropSpawnTime);
+        }
+        
+
     }
 }
