@@ -50,15 +50,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   speed: 5
   attackDistanceThreshold: 5
-  timeBetweenAttacks: 2
+  timeBetweenAttacks: 1.5
   damage: 1
-  wanderRadius: 10
-  wanderTimer: 3
+  wanderRadius: 13
+  wanderTimer: 2.5
   blood: {fileID: 6008741175396239884}
   moanSound: {fileID: 8300000, guid: aa252df7c12a227498d8885b0cf98a04, type: 3}
 --- !u!136 &2592191638332292266

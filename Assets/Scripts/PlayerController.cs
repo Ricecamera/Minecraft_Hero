@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 CheckOutofBound(Vector3 targetPosition) {
         float xBound = CameraManager.instance.Bound.x;
         float zBound = CameraManager.instance.Bound.z;
+
+        //print(xBound);
+        //print(zBound);
         if (targetPosition.x > xBound) {
             targetPosition.x = xBound;
         }
@@ -56,6 +59,4 @@ public class PlayerController : MonoBehaviour
         myRigidbody.velocity = Vector3.zero;
         myRigidbody.angularVelocity = Vector3.zero;
     }
-
-
 }

@@ -12,7 +12,6 @@ public class Player : LivingEntity {
 
     // Player State
     public float movementSpeed;
-    //public Transform respawnPos;
 
     // Particle effects
     public ParticleSystem deathParticle;
@@ -63,5 +62,10 @@ public class Player : LivingEntity {
                 gunController.Shoot();
             }
         }
+    }
+
+    public override void Die() {
+        playerAnim.SetBool("Death_b", true);
+        base.Die();
     }
 }

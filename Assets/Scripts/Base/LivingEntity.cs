@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 
 public class LivingEntity : MonoBehaviour, IDamageable {
@@ -10,10 +9,16 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     protected bool dead;
 
     public float startingHealth;
-    public event Action OnDeath;
+    public UnityEvent OnDeath;
+
+    public bool Dead {
+        get {return dead;}
+    }
 
     protected virtual void Start() {
         health = startingHealth;
+        if (OnDeath == null)
+            OnDeath = new UnityEvent();
     }
 
     public void TakeHit(float damage, RaycastHit hit) {
@@ -31,10 +36,8 @@ public class LivingEntity : MonoBehaviour, IDamageable {
 
     public virtual void Die() {
         dead = true;
-        if (OnDeath != null) {
-            OnDeath();
-        }
-        GameObject.Destroy(gameObject);
+        OnDeath?.Invoke();
+        GameObject.Destroy(gameObject, 1.5f);
     }
 
     public void setHealth(int newHealth) {
