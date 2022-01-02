@@ -9,11 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3515429363847194164}
-  - component: {fileID: 3515429363847194167}
-  - component: {fileID: 3515429363847194162}
   - component: {fileID: 3515429363847194163}
+  - component: {fileID: 2592191638332292266}
+  - component: {fileID: 3515429363847194162}
   - component: {fileID: 7415554060480164252}
-  m_Layer: 0
+  - component: {fileID: -8911213871593956234}
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Zombie
   m_Icon: {fileID: 0}
@@ -36,8 +37,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3515429363847194167
-BoxCollider:
+--- !u!114 &3515429363847194163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515429363847194120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce88c8a6c415144b81df5834d4ecffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 3
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  speed: 5
+  attackDistanceThreshold: 5
+  timeBetweenAttacks: 2
+  damage: 1
+  wanderRadius: 10
+  wanderTimer: 3
+  blood: {fileID: 6008741175396239884}
+  moanSound: {fileID: 8300000, guid: aa252df7c12a227498d8885b0cf98a04, type: 3}
+--- !u!136 &2592191638332292266
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -46,9 +71,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.7570171, y: 1.7174685, z: 1}
-  m_Center: {x: -0.042780876, y: 0.35873425, z: 0}
+  m_Radius: 0.9
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!54 &3515429363847194162
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -65,35 +91,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &3515429363847194163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3515429363847194120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ce88c8a6c415144b81df5834d4ecffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1024
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 512
-  blood: {fileID: 6008741175396239884}
-  health: 2
-  speed: 5
-  moanSound: {fileID: 8300000, guid: aa252df7c12a227498d8885b0cf98a04, type: 3}
-  timeBetweenAttacks: 1
-  pushFroce: 100
-  atk: 1
-  sightRange: 6
-  attackRange: 2.5
-  playerInSightRange: 0
-  playerInAttackRange: 0
 --- !u!82 &7415554060480164252
 AudioSource:
   m_ObjectHideFlags: 0
@@ -190,6 +187,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &-8911213871593956234
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3515429363847194120}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.85
+  m_Speed: 5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.7
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &1985768684168317267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,6 +296,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0c44d05894ea2fa4d973588775702446,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c44d05894ea2fa4d973588775702446, type: 3}
 --- !u!4 &2018852219130998456 stripped
@@ -295,6 +319,10 @@ PrefabInstance:
     - target: {fileID: 100748, guid: cd4d7020429cde74db076ffa72495419, type: 3}
       propertyPath: m_Name
       value: FX_Fireworks_Green_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 100748, guid: cd4d7020429cde74db076ffa72495419, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 459750, guid: cd4d7020429cde74db076ffa72495419, type: 3}
       propertyPath: m_RootOrder

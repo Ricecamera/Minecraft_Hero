@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pistol : Shooting
 {
-    protected virtual void Start() {
+    protected override void Start() {
         currentMagazine = magazineSize;
         base.Start();
     }
@@ -19,14 +19,14 @@ public class Pistol : Shooting
         }
 
         // check if current Time is able to shoot
-        if (Time.time > nextShotTime) {
-            nextShotTime = Time.time + msBetweenShots / 1000;
+        if (CanShoot()) {
             gun_audioSource.PlayOneShot(fireSound);
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             bullet.Speed = muzzleVelocity;
 
             // reduce bullets in magazine by one
             currentMagazine--;
+            ResetTimer();
         }
     }
 

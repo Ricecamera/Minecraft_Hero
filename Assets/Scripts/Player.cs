@@ -25,8 +25,6 @@ public class Player : LivingEntity {
     public AudioClip hurtSound;
     private AudioSource p_audiosource;
 
-
-
     // Start is called before the first frame update
     protected override void Start()
     {

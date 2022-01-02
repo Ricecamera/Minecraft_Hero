@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class AmmoGun : Shooting {
 
-    public int reserveAmmo;
-
     [SerializeField]
     protected int totalAmmo;
+
+    public int reserveAmmo;
 
     protected override void Start() {
         if (totalAmmo >= magazineSize) {
@@ -33,14 +33,14 @@ public class AmmoGun : Shooting {
         }
 
         // check if current Time is able to shoot
-        if (Time.time > nextShotTime) {
-            nextShotTime = Time.time + msBetweenShots / 1000;
+        if (CanShoot()) {
             gun_audioSource.PlayOneShot(fireSound);
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             bullet.Speed = muzzleVelocity;
 
             // reduce bullets in magazine by one
             currentMagazine--;
+            ResetTimer();
         }
     }
 
