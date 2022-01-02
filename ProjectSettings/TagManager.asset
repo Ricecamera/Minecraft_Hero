@@ -13,11 +13,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
   - PostProcessing
   - Player
   - Ground
+  - BlcokingLayer
+  - Enemy
   - 
   - 
   - 

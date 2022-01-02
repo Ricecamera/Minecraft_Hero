@@ -5,10 +5,10 @@ using UnityEngine;
 public class GunController : MonoBehaviour
 {
     private Shooting equippedGun;
-    
+
     public Transform weaponHold;
     public Shooting startingGun;
-    // Start is called before the first frame update
+
     void Start()
     {
         if (startingGun != null) {
