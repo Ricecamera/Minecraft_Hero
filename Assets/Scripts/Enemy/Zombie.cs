@@ -43,7 +43,7 @@ public class Zombie : LivingEntity {
 
             target = GameObject.FindGameObjectWithTag("Player").transform;
             targetEntity = target.GetComponent<LivingEntity>();
-            // Run OnTargetDeath when player dies
+            // Subscribe player death event
             targetEntity.OnDeath.AddListener(OnTargetDeath);
 
             // Get Collision radiuses which use for calculate proper attack range
@@ -57,6 +57,8 @@ public class Zombie : LivingEntity {
         }
         timer = 0;
         agent.speed = speed;
+        // Subscribe player spawn event
+        GameManager.instance.OnPlayerSpawn.AddListener(OnPlayerSpawn);
     }
 
     void Update() {
@@ -100,13 +102,19 @@ public class Zombie : LivingEntity {
         }
     }
 
-    void OnTargetDeath() {
-        targetEntity.OnDeath.RemoveListener(OnTargetDeath);
-        print("Player has died");
-        currentState = State.Wandering;
-        Wandering();
-    }
+    IEnumerator Chasing() {
+        float chasingDelay = 1f;
 
+        yield return new WaitForSeconds(chasingDelay);
+        currentState = State.Chasing;
+
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        targetEntity = target.GetComponent<LivingEntity>();
+
+        // Subscribe player death event
+        targetEntity.OnDeath.AddListener(OnTargetDeath);
+        StartCoroutine(UpdatePath());
+    }
     IEnumerator UpdatePath() {
         float refreshRate = .25f;
 
@@ -160,7 +168,19 @@ public class Zombie : LivingEntity {
         agent.enabled = true;
     }
 
-    void OnDrawGizmosSelected() {
+    private void OnTargetDeath() {
+        targetEntity.OnDeath.RemoveListener(OnTargetDeath);
+        print("Player has died");
+        currentState = State.Wandering;
+        Wandering();
+    }
+
+    private void OnPlayerSpawn() {
+        print("Player has spawned");
+        StartCoroutine(Chasing());
+    }
+
+    public void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackDistanceThreshold);
         Gizmos.color = Color.yellow;

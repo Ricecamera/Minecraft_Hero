@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using TMPro;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class Wave
@@ -56,10 +54,7 @@ public class GameManager : MonoBehaviour
     public int level = 0;
     public bool isGameOver = false;
 
-    // UI
-    //public TextMeshProUGUI lifeText;
-    //public TextMeshProUGUI gameOverText;
-
+    public UnityEvent OnPlayerSpawn;
 
     //private AudioSource backgroundMusic;
 
@@ -77,6 +72,9 @@ public class GameManager : MonoBehaviour
         //backgroundMusic = GetComponent<AudioSource>();
         Player playerEntity = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         playerEntity.OnDeath.AddListener(OnPlayerDeath);
+        if (OnPlayerSpawn == null) {
+            OnPlayerSpawn = new UnityEvent();
+        }
         NextWave();
     }
 
@@ -156,6 +154,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnPlayer() {
         yield return new WaitForSeconds(playerSpawnDelay);
+        OnPlayerSpawn?.Invoke();
         Instantiate(playerPrefab, GetRandomPosition(), Quaternion.identity);
     }
 }
