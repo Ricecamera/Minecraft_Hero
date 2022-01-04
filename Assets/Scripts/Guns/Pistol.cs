@@ -12,7 +12,7 @@ public class Pistol : Shooting
     public override void Shoot() {
         if (IsMagazineEmpty()) {
             if (!isReloading) {
-                gun_audioSource.PlayOneShot(reloadSound, .5f);
+                AudioManager.instance.PlaySingle(reloadSound);
                 StartCoroutine(Reload());
             }
             return;
@@ -20,7 +20,7 @@ public class Pistol : Shooting
 
         // check if current Time is able to shoot
         if (CanShoot()) {
-            gun_audioSource.PlayOneShot(fireSound);
+            AudioManager.instance.PlaySingle(fireSound);
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             bullet.Speed = muzzleVelocity;
 

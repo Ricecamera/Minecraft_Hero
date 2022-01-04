@@ -28,13 +28,11 @@ public class Zombie : LivingEntity {
 
     // Sound effects
     public AudioClip moanSound;
-    private AudioSource zombie_audioSource;
 
     protected override void Start()
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
-        zombie_audioSource = GetComponent<AudioSource>();
 
         // if zombie doesn't have NavMesh, do nothing
         if (agent == null) return;
@@ -208,7 +206,7 @@ public class Zombie : LivingEntity {
 
     public override void Die(float delay) {
         currentState = State.Death;
-        zombie_audioSource.PlayOneShot(moanSound);
+        EnemySoundManager.instance.PlaySingle(moanSound);
         base.Die(delay);
     }
 }

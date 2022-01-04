@@ -48,7 +48,13 @@ public class GameManager : MonoBehaviour
     private int enemiesRemainingToSpawn;
     private int enemiesRemainingAlive;
 
+    // Gameplay
+    private int playerLife = 3;
     private int currentAirDrop = 0;
+    public float playerSpawnDelay = 3f;
+    public float airDropSpawnTime = 5f;
+    public int level = 0;
+    public bool isGameOver = false;
 
     // Object References
     public Board boardManager;
@@ -57,16 +63,7 @@ public class GameManager : MonoBehaviour
     public Player playerPrefab;
     public GameObject boxPrefab;
 
-    // Gameplay
-    public int playerLife = 3;
-    public float playerSpawnDelay = 3f;
-    public float airDropSpawnTime = 5f;
-    public int level = 0;
-    public bool isGameOver = false;
-
     public UnityEvent OnPlayerSpawn;
-
-    //private AudioSource backgroundMusic;
 
     private void Awake() {
         // Singleton pattern
@@ -79,7 +76,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //backgroundMusic = GetComponent<AudioSource>();
         Player playerEntity = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         playerEntity.OnDeath.AddListener(OnPlayerDeath);
         if (OnPlayerSpawn == null) {
@@ -190,7 +186,12 @@ public class GameManager : MonoBehaviour
             }
             yield return new WaitForSeconds(airDropSpawnTime);
         }
-        
+    }
 
+    public void IncresePlayerLife(int addLife) {
+        if (playerLife + addLife <= MAX_PLAYER_LIFE)
+            playerLife += addLife;
+        else
+            playerLife = MAX_PLAYER_LIFE;
     }
 }

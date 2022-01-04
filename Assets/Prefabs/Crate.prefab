@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1243609095338375946}
   - component: {fileID: 5857897510857959578}
   - component: {fileID: 7631480881895202737}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   durability: 3
+  itemYOffset: 2.2
   destroyDelay: 0.5
   dropDamageRadius: 5
   pushForce: 10

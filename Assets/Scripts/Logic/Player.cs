@@ -25,7 +25,9 @@ public class Player : LivingEntity {
 
     // Audio
     public AudioClip hurtSound;
-    private AudioSource p_audiosource;
+    public AudioClip drinkingSound;
+    public AudioClip lifeUpSound;
+    public AudioClip weaponPickupSound;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -37,7 +39,6 @@ public class Player : LivingEntity {
         sceneCamera = Camera.main;
 
         playerAnim = playerAvatar.GetComponent<Animator>();
-        p_audiosource = GetComponent<AudioSource>();
         StartCoroutine(SetInvincible());
     }
 
@@ -81,7 +82,7 @@ public class Player : LivingEntity {
     }
 
     public override void TakeDamage(float damage) {
-        p_audiosource.PlayOneShot(hurtSound, 1f);
+        AudioManager.instance.PlaySingle(hurtSound);
         if (!isInvincible) {
             health -= damage;
             StartCoroutine(SetInvincible());
@@ -91,5 +92,21 @@ public class Player : LivingEntity {
             float dealthDelay = 1.5f;
             Die(dealthDelay);
         }
+    }
+
+    public void PickUp(Item item) {
+        if (item.CompareTag("HeathPotion")) {
+            HeathPotion potion = item as HeathPotion;
+            float newHeath = health += potion.HealAmount;
+            setHealth(newHeath);
+            AudioManager.instance.PlaySingle(drinkingSound);
+        }
+        else if (item.CompareTag("LifeUP")) {
+            //GameManager.instance.IncresePlayerLife(1);
+            float newHeath = maxHealth;
+            setHealth(newHeath);
+            AudioManager.instance.PlaySingle(lifeUpSound);
+        }
+        return;
     }
 }

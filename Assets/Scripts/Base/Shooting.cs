@@ -17,7 +17,6 @@ public abstract class Shooting : MonoBehaviour
 
     protected float msBetweenShots;             // inverse of fire rate
     protected float nextShotTime;               // use to keep track of fire delay time
-    protected AudioSource gun_audioSource;
 
     public Transform firePoint;                 // the position where bullet come out
     public Bullet bulletPrefab;
@@ -29,7 +28,6 @@ public abstract class Shooting : MonoBehaviour
     {
         timer = 0;
         msBetweenShots = 1/fireRate;
-        gun_audioSource = GetComponent<AudioSource>();
     }
 
     protected virtual void Update() {

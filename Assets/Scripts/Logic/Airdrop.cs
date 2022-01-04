@@ -13,16 +13,19 @@ public class Airdrop : MonoBehaviour, IDamageable {
     private bool destroyed = false;
     private Rigidbody boxRb;
 
+    public float itemYOffset = 2.2f;
     public float destroyDelay = .5f;
     public float dropDamageRadius = 3f;
     public float pushForce = 5f;
+    
 
-    public Pickup itemToSpawn = null;
+    public Item itemToSpawn = null;
     public LayerMask collisionMask;
     public UnityEvent OnDestroy;
 
 
     void Start() {
+        itemToSpawn = Randomizer.instance.getRandomItem();
         boxRb = GetComponent<Rigidbody>();
         boxRb.isKinematic = false;
     }
@@ -53,7 +56,8 @@ public class Airdrop : MonoBehaviour, IDamageable {
     }
 
     private void SpawnItem() {
-        //Instantiate(itemToSpawn, transform);
+        Vector3 spawnPos = new Vector3(transform.position.x, transform.position.y + itemYOffset, transform.position.z);
+        Item dropItem = Instantiate(itemToSpawn, spawnPos, Quaternion.identity);
     }
 
     public void TakeHit(float damage, RaycastHit hit) {

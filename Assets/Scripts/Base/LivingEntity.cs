@@ -8,7 +8,8 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     protected float health;
     protected bool dead;
 
-    public float startingHealth;
+    [SerializeField]
+    protected float startingHealth, maxHealth;
     public UnityEvent OnDeath;
 
     public bool Dead {
@@ -41,9 +42,9 @@ public class LivingEntity : MonoBehaviour, IDamageable {
         GameObject.Destroy(gameObject, delay);
     }
 
-    public void setHealth(int newHealth) {
+    public void setHealth(float newHealth) {
         if (newHealth > 0)
-            health = newHealth;
+            health = (newHealth > maxHealth) ? maxHealth: newHealth;
         else
             health = 1;
     }
