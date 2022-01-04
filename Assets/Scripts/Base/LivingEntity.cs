@@ -21,23 +21,24 @@ public class LivingEntity : MonoBehaviour, IDamageable {
             OnDeath = new UnityEvent();
     }
 
-    public void TakeHit(float damage, RaycastHit hit) {
+    public virtual void TakeHit(float damage, RaycastHit hit) {
         // Do some stuff here with hit var
         TakeDamage(damage);
     }
 
-    public void TakeDamage(float damage) {
+    public virtual void TakeDamage(float damage) {
         health -= damage;
 
         if (health <= 0 && !dead) {
-            Die();
+            float deathDelay = .75f;
+            Die(deathDelay);
         }
     }
 
-    public virtual void Die() {
+    public virtual void Die(float delay) {
         dead = true;
         OnDeath?.Invoke();
-        GameObject.Destroy(gameObject, 1.5f);
+        GameObject.Destroy(gameObject, delay);
     }
 
     public void setHealth(int newHealth) {

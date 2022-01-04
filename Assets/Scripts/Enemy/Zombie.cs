@@ -34,6 +34,7 @@ public class Zombie : LivingEntity {
     {
         base.Start();
         agent = GetComponent<NavMeshAgent>();
+        zombie_audioSource = GetComponent<AudioSource>();
 
         // if zombie doesn't have NavMesh, do nothing
         if (agent == null) return;
@@ -90,6 +91,8 @@ public class Zombie : LivingEntity {
                 // Do something between attack
                 break;
             default:
+                if (agent != null) 
+                    agent.isStopped = true;
                 timer = 0;
                 break;
         }
@@ -198,8 +201,14 @@ public class Zombie : LivingEntity {
         return finalPosition;
     }
 
-    public override void Die() {
+    public override void TakeDamage(float damage) {
+        blood.Play();
+        base.TakeDamage(damage);
+    }
+
+    public override void Die(float delay) {
         currentState = State.Death;
-        base.Die();
+        zombie_audioSource.PlayOneShot(moanSound);
+        base.Die(delay);
     }
 }

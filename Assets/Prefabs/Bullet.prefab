@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3558113473106955990}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,6 +79,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 1536
+  damage: 1
 --- !u!1001 &4996042946853736442
 PrefabInstance:
   m_ObjectHideFlags: 0

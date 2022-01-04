@@ -223,7 +223,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
   movementSpeed: 12
+  invicibleTime: 3
   deathParticle: {fileID: 7815425472194050862}
   playerAvatar: {fileID: 7815425472494472068}
   hurtSound: {fileID: 8300000, guid: b00b1a9aa54e3244f9e402539a0870d7, type: 3}

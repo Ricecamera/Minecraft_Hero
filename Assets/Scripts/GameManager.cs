@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
         if (OnPlayerSpawn == null) {
             OnPlayerSpawn = new UnityEvent();
         }
-        //NextWave();
+        NextWave();
         StartCoroutine(SpawnAirDrop());
     }
 
@@ -134,7 +134,10 @@ public class GameManager : MonoBehaviour
 
         playerLife--;
         StartCoroutine(SpawnPlayer());
-        
+    }
+
+    private void OnAirDropDestroy() {
+        if (currentAirDrop > 0) currentAirDrop--;
     }
 
     IEnumerator SpawnWave(Wave currentWave)
@@ -180,7 +183,9 @@ public class GameManager : MonoBehaviour
             if (currentGrid.isVacant && currentAirDrop < MAX_AIRDROPS) {
                 currentGrid.isVacant = false;
                 Vector3 spawnPos = new Vector3(currentGrid.Position.x, AIRDROP_STARTING_Y, currentGrid.Position.y);
-                Instantiate(boxPrefab, spawnPos, Quaternion.identity);
+                GameObject box = Instantiate(boxPrefab, spawnPos, Quaternion.identity);
+                Airdrop airdrop = box.GetComponent<Airdrop>();
+                airdrop.OnDestroy.AddListener(OnAirDropDestroy);
                 currentAirDrop++;
             }
             yield return new WaitForSeconds(airDropSpawnTime);

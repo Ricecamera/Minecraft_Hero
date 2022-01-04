@@ -75,19 +75,21 @@ public class Player : LivingEntity {
         isInvincible = false;
     }
 
-    public override void Die() {
+    public override void Die(float delay) {
         playerAnim.SetBool("Death_b", true);
-        base.Die();
+        base.Die(delay);
     }
 
-    public new void TakeDamage(float damage) {
+    public override void TakeDamage(float damage) {
+        p_audiosource.PlayOneShot(hurtSound, 1f);
         if (!isInvincible) {
             health -= damage;
             StartCoroutine(SetInvincible());
         }
         
         if (health <= 0 && !dead) {
-            Die();
+            float dealthDelay = 1.5f;
+            Die(dealthDelay);
         }
     }
 }

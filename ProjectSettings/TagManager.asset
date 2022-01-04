@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Village Entry
   - Zombie
+  - PlayerProjectile
+  - Ground
   layers:
   - Default
   - TransparentFX
