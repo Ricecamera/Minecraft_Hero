@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
-    protected float speed = 10;
+    [SerializeField]
+    protected float speed = 10, damage = 1;
+
+    protected float lifetime = 10;
+    protected float skinWidth = .5f;
 
     public LayerMask collisionMask;
-    public float damage = 1;
-
-    float lifetime = 10;
-    float skinWidth = .5f;
-
     public float Speed {
         get { return speed; }
         set {
@@ -42,7 +41,7 @@ public class Bullet : MonoBehaviour {
         }
     }
 
-    protected void CheckCollisions(float moveDistance) {
+    protected virtual void CheckCollisions(float moveDistance) {
         Ray ray = new Ray(transform.position, transform.forward);
         RaycastHit hit;
 

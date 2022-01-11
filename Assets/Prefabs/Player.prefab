@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1906582485075546663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2469465123985433380}
+  m_Layer: 0
+  m_Name: Hold_RPG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2469465123985433380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906582485075546663}
+  m_LocalRotation: {x: -0, y: -0.33709478, z: -0, w: 0.94147074}
+  m_LocalPosition: {x: 0.813, y: 2.4, z: 0.469}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 7815425473369578819}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -39.4, z: 0}
+--- !u!1 &2529447932322900929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8386301352511114436}
+  m_Layer: 7
+  m_Name: Hold_Long_gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8386301352511114436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2529447932322900929}
+  m_LocalRotation: {x: -0, y: -0.30021855, z: -0, w: 0.9538705}
+  m_LocalPosition: {x: -0.287, y: 1.947, z: 0.799}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7815425473369578819}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: -34.941, z: 0}
 --- !u!1 &7815425472631310834
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +70,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7815425472631310835}
   m_Layer: 7
-  m_Name: Hold_weapon
+  m_Name: Hold_Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,6 +124,8 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 7815425472631310835}
+  - {fileID: 8386301352511114436}
+  - {fileID: 2469465123985433380}
   - {fileID: 7815425472494639012}
   - {fileID: 7815425472208264922}
   m_Father: {fileID: 0}
@@ -113,6 +175,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputVector: {x: 0, y: 0}
   mousePosition: {x: 0, y: 0, z: 0}
+  isFire: 0
+  Q: 0
+  E: 0
 --- !u!114 &7815425473369578823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +199,11 @@ MonoBehaviour:
   invicibleTime: 3
   deathParticle: {fileID: 7815425472194050862}
   playerAvatar: {fileID: 7815425472494472068}
+  invincibleIndicator: {fileID: 0}
   hurtSound: {fileID: 8300000, guid: b00b1a9aa54e3244f9e402539a0870d7, type: 3}
+  drinkingSound: {fileID: 8300000, guid: a4fac655efb9e114db2e40400a0a5154, type: 3}
+  lifeUpSound: {fileID: 8300000, guid: 9408094e8aa324d4db69d73648dcba87, type: 3}
+  weaponPickupSound: {fileID: 0}
 --- !u!114 &7815425473369578820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c58ae33e1538dd42b5f3e770966ed9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponHold: {fileID: 7815425472631310835}
+  currentGun: 0
+  selectIdx: 0
+  playerAnim: {fileID: 7815425472485128260}
+  weaponHolds: []
+  weaponInventory: []
   startingGun: {fileID: 6460219562675884818, guid: a2317e9b1b36dd143bb02af8ed2dc539,
     type: 3}
 --- !u!1001 &7815425472208402218
@@ -179,7 +252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 403952, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 403952, guid: 6586ff0f14125534cae2f5d8f04b7871, type: 3}
       propertyPath: m_LocalScale.x
@@ -376,7 +449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6f52b946693e54048af74f5cd6ba49f8, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6f52b946693e54048af74f5cd6ba49f8, type: 3}
       propertyPath: m_LocalScale.x
@@ -441,6 +514,12 @@ GameObject:
 --- !u!4 &7815425472494639012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 6f52b946693e54048af74f5cd6ba49f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7815425472494505252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7815425472485128260 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 6f52b946693e54048af74f5cd6ba49f8,
     type: 3}
   m_PrefabInstance: {fileID: 7815425472494505252}
   m_PrefabAsset: {fileID: 0}

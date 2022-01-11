@@ -14,14 +14,15 @@ public class Player : LivingEntity {
     private bool isInvincible = false;
 
     public float movementSpeed;
-    public float invicibleTime = 3f;
+    public float invicibleTime = 2f;
 
     // Particle effects
     public ParticleSystem deathParticle;
 
     // Player model and animation
-    public GameObject playerAvatar;
     private Animator playerAnim;
+    public GameObject playerAvatar;
+    public GameObject invincibleIndicator;
 
     // Audio
     public AudioClip hurtSound;
@@ -63,17 +64,26 @@ public class Player : LivingEntity {
             }
 
             // Fire a gun
-            if (Input.GetButton("Fire1")) {
+            if (_input.isFire) {
                 gunController.Shoot();
+            }
+
+            if (_input.Q) {
+                gunController.ChangeGun(-1);
+            }
+            else if (_input.E) {
+                gunController.ChangeGun(1);
             }
         }
     }
 
     IEnumerator SetInvincible() {
         // To Do: trigger invincible effect
+        invincibleIndicator.SetActive(true);
         isInvincible = true;
         yield return new WaitForSeconds(invicibleTime);
         isInvincible = false;
+        invincibleIndicator.SetActive(false);
     }
 
     public override void Die(float delay) {
@@ -82,15 +92,18 @@ public class Player : LivingEntity {
     }
 
     public override void TakeDamage(float damage) {
-        AudioManager.instance.PlaySingle(hurtSound);
+        
         if (!isInvincible) {
+            AudioManager.instance.PlaySingle(hurtSound);
             health -= damage;
-            StartCoroutine(SetInvincible());
         }
         
         if (health <= 0 && !dead) {
             float dealthDelay = 1.5f;
             Die(dealthDelay);
+        }
+        else {
+            StartCoroutine(SetInvincible());
         }
     }
 

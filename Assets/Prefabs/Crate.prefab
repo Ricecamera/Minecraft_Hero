@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf72c6b58e8d02446a17d5d3f7bc3199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durability: 3
+  durability: 20
   itemYOffset: 2.2
   destroyDelay: 0.5
   dropDamageRadius: 5

@@ -8,9 +8,9 @@ public class WeaponDrop : Item
 
     public override void ONPickup(Collider other) {
         GunController controller = other.GetComponent<GunController>();
-        if (controller != null) {
+        if (controller != null && other.CompareTag("Player")) {
             AmmoGun selectedGun = Randomizer.instance.getRandomGun();
-            controller.EquipGun(selectedGun);
+            controller.AddGun(selectedGun);
         }
         
         CancelInvoke("DestroySelf");

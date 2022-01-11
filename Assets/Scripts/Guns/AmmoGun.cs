@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class AmmoGun : Shooting {
+public abstract class AmmoGun : Shooting {
 
     [SerializeField]
     protected int totalAmmo;
@@ -21,27 +21,6 @@ public class AmmoGun : Shooting {
             reserveAmmo = 0;
         }
         base.Start();
-    }
-
-    public override void Shoot() {
-        if (IsMagazineEmpty()) {
-            if (!IsBulletEmpty() && !isReloading) {
-                AudioManager.instance.PlaySingle(reloadSound);
-                StartCoroutine(Reload());
-            }
-            return;
-        }
-
-        // check if current Time is able to shoot
-        if (CanShoot()) {
-            AudioManager.instance.PlaySingle(fireSound);
-            Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            bullet.Speed = muzzleVelocity;
-
-            // reduce bullets in magazine by one
-            currentMagazine--;
-            ResetTimer();
-        }
     }
 
     protected override IEnumerator Reload() {

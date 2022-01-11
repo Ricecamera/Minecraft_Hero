@@ -9,6 +9,9 @@ TagManager:
   - Ground
   - LifeUP
   - HeathPotion
+  - Pistol
+  - RPG
+  - LongGun
   layers:
   - Default
   - TransparentFX

@@ -24,7 +24,6 @@ public class CameraManager : MonoBehaviour
         else if (instance != this)
             // Then destroy this. This enforces our singleton pattern
             Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
