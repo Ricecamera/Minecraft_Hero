@@ -9,23 +9,23 @@ public abstract class AmmoGun : Shooting {
     public int totalAmmo;
     public int reserveAmmo;
 
-    protected override void Start() {
+    protected override void Awake() {
         if (totalAmmo >= magazineSize) {
             currentMagazine = magazineSize;
             reserveAmmo = totalAmmo - magazineSize;
         }
         else {
-            currentMagazine = totalAmmo; ;
+            currentMagazine = totalAmmo;
             reserveAmmo = 0;
         }
-        base.Start();
+        base.Awake();
     }
 
     protected override IEnumerator Reload() {
 
         // Prevent this IEnumerator from called multiple time
         isReloading = true;
-
+        OnReload?.Invoke(reloadTime);
         yield return new WaitForSeconds(reloadTime);
         if (reserveAmmo >= magazineSize) {
             currentMagazine = magazineSize;
@@ -36,6 +36,7 @@ public abstract class AmmoGun : Shooting {
             reserveAmmo = 0;
         }
         OnShoot?.Invoke(currentMagazine, reserveAmmo);
+        
         isReloading = false;
     }
 

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Pistol : Shooting
 {
-    protected override void Start() {
+    protected override void Awake() {
         currentMagazine = magazineSize;
-        base.Start();
+        base.Awake();
     }
 
     public override void Shoot() {
@@ -36,6 +36,7 @@ public class Pistol : Shooting
 
         // Prevent this IEnumerator from called multiple time
         isReloading = true;
+        OnReload?.Invoke(reloadTime);
         yield return new WaitForSeconds(reloadTime);
         currentMagazine = magazineSize;
         OnShoot?.Invoke(currentMagazine, -1);

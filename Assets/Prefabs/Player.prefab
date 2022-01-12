@@ -154,7 +154,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7815425473369578818}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -240,6 +240,7 @@ MonoBehaviour:
   - {fileID: 0}
   startingGun: {fileID: 6460219562675884818, guid: a2317e9b1b36dd143bb02af8ed2dc539,
     type: 3}
+  crossHair: {fileID: 0}
 --- !u!1001 &5398118716658729807
 PrefabInstance:
   m_ObjectHideFlags: 0

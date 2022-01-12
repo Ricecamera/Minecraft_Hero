@@ -99,7 +99,8 @@ MonoBehaviour:
   gunTitle: Shotgun
   muzzleVelocity: 10
   fireRate: 1
-  reloadTime: 2.5
+  attackRange: 5
+  reloadTime: 2.25
   currentMagazine: 0
   magazineSize: 6
   firePoint: {fileID: 596142979579261228}
@@ -107,6 +108,12 @@ MonoBehaviour:
   icon: {fileID: 0}
   fireSound: {fileID: 0}
   reloadSound: {fileID: 0}
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReload:
+    m_PersistentCalls:
+      m_Calls: []
   totalAmmo: 24
   reserveAmmo: 0
   shotDistance: 8

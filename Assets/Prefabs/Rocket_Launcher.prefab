@@ -99,7 +99,8 @@ MonoBehaviour:
   gunTitle: RPG
   muzzleVelocity: 15
   fireRate: 1
-  reloadTime: 3
+  attackRange: 15
+  reloadTime: 2
   currentMagazine: 0
   magazineSize: 1
   firePoint: {fileID: 7424268092342606764}
@@ -108,6 +109,12 @@ MonoBehaviour:
   icon: {fileID: 0}
   fireSound: {fileID: 0}
   reloadSound: {fileID: 0}
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReload:
+    m_PersistentCalls:
+      m_Calls: []
   totalAmmo: 8
   reserveAmmo: 0
 --- !u!1 &7424268092342606765

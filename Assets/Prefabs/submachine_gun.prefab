@@ -129,7 +129,8 @@ MonoBehaviour:
   gunTitle: Tootii
   muzzleVelocity: 50
   fireRate: 8
-  reloadTime: 1.5
+  attackRange: 15
+  reloadTime: 1.75
   currentMagazine: 0
   magazineSize: 25
   firePoint: {fileID: 1423505039918034596}
@@ -138,5 +139,11 @@ MonoBehaviour:
   icon: {fileID: 0}
   fireSound: {fileID: 0}
   reloadSound: {fileID: 0}
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReload:
+    m_PersistentCalls:
+      m_Calls: []
   totalAmmo: 100
   reserveAmmo: 0

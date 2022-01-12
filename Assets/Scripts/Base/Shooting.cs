@@ -19,6 +19,7 @@ public abstract class Shooting : MonoBehaviour
     [Header("Stats")]
     public float muzzleVelocity;                // velocity of fired bullets
     public float fireRate;                      // fired bullets per second
+    public float attackRange;                   // how far cross hair can go
     public float reloadTime;
     public int currentMagazine, magazineSize;
     
@@ -32,14 +33,12 @@ public abstract class Shooting : MonoBehaviour
     public AudioClip reloadSound;
 
     public UnityEvent<int, int> OnShoot;
+    public UnityEvent<float> OnReload;
 
-    private void Awake() {
+    protected virtual void Awake() {
         icon = Resources.Load<Sprite>("Sprites/" + gunTitle);
-    }
-    protected virtual void Start()
-    {
         timer = 0;
-        msBetweenShots = 1/fireRate;
+        msBetweenShots = 1 / fireRate;
         if (OnShoot == null)
             OnShoot = new UnityEvent<int, int>();
     }

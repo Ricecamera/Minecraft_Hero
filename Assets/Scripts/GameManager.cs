@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         UImanager = GameObject.Find("UI").GetComponent<UIManager>();
         Reset();
         SpawnPlayer(new Vector3(0, 0, 0));
-        NextWave();
+        //NextWave();
         StartCoroutine(SpawnAirDrop());
     }
 

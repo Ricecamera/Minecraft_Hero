@@ -62,6 +62,7 @@ public class Player : LivingEntity {
 
                 //Debug.DrawRay(ray.origin,ray.direction * 100,Color.red);
                 controller.LookAt(hitpoint);
+                gunController.UpdateCrossHair(hitpoint);
             }
 
             // Fire a gun

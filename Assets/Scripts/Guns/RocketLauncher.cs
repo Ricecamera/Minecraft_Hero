@@ -6,7 +6,7 @@ public class RocketLauncher : AmmoGun
 {
     Rocket currentRocket = null;
 
-    protected override void Start() {
+    protected override void Awake() {
         if (totalAmmo >= magazineSize) {
             currentMagazine = magazineSize;
             reserveAmmo = totalAmmo - magazineSize;
@@ -18,7 +18,7 @@ public class RocketLauncher : AmmoGun
         
         if (currentMagazine >= 0)
             currentRocket = Instantiate(bulletPrefab, firePoint) as Rocket;
-        base.Start();
+        base.Awake();
     }
 
     public override void Shoot() {
@@ -43,19 +43,9 @@ public class RocketLauncher : AmmoGun
     protected override IEnumerator Reload() {
 
         // Prevent this IEnumerator from called multiple time
-        isReloading = true;
+        yield return base.Reload();
 
-        yield return new WaitForSeconds(reloadTime);
-        if (reserveAmmo >= magazineSize) {
-            currentMagazine = magazineSize;
-            reserveAmmo -= magazineSize;
-        }
-        else {
-            currentMagazine = reserveAmmo;
-            reserveAmmo = 0;
-        }
-         if (currentMagazine >= 0)
+        if (currentMagazine >= 0)
             currentRocket = Instantiate(bulletPrefab, firePoint) as Rocket;
-        isReloading = false;
     }
 }

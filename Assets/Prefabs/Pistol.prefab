@@ -99,7 +99,8 @@ MonoBehaviour:
   gunTitle: Pistol
   muzzleVelocity: 30
   fireRate: 1.5
-  reloadTime: 1.75
+  attackRange: 5
+  reloadTime: 1.5
   currentMagazine: 0
   magazineSize: 10
   firePoint: {fileID: 6204911818588723027}
@@ -108,6 +109,12 @@ MonoBehaviour:
   icon: {fileID: 0}
   fireSound: {fileID: 8300000, guid: 9afa7b0463ae3254287649ced1fee9ef, type: 3}
   reloadSound: {fileID: 8300000, guid: 15d7c727e8b9d4d909758851d8cc7cac, type: 3}
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReload:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9166889911137128556
 GameObject:
   m_ObjectHideFlags: 0

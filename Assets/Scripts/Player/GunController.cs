@@ -19,10 +19,12 @@ public class GunController : MonoBehaviour
     public List<Shooting> weaponInventory;
 
     public Shooting startingGun;
+    public Transform crossHair;
 
     void Start()
     {
         UImanager = GameObject.Find("UI").GetComponent<UIManager>();
+        crossHair = GameObject.Find("Cross hair").GetComponent<Transform>();
         if (startingGun != null) {
             AddGun(startingGun);
             equippedGunIdx = selectIdx = 0;
@@ -31,7 +33,17 @@ public class GunController : MonoBehaviour
         }
     }
 
+    public void UpdateCrossHair(Vector3 target) {
+        Shooting equippedGun = weaponInventory[equippedGunIdx];
+        target.y = equippedGun.transform.position.y;
+        
 
+        if (equippedGun != null) {
+            float distance = (target - equippedGun.transform.position).magnitude * 0.9f;
+            Vector3 newCrossHairPos = equippedGun.transform.position + equippedGun.transform.forward * distance;
+            crossHair.position = newCrossHairPos;
+        }
+    }
 
     private int HasDuplicateGun(int gunId) {
 
@@ -85,7 +97,8 @@ public class GunController : MonoBehaviour
         currentGuns--;
 
         // Set current gun to pistol
-        equippedGunIdx = 0;
+        equippedGunIdx = selectIdx = 0;
+        UImanager.UpdateGun(weaponInventory[0], 1);
         EquipGun(0);
     }
 
