@@ -62,6 +62,12 @@ public class Zombie : LivingEntity {
 
     void Update() {
         timer += Time.deltaTime;
+
+        bool isGameOver = GameManager.instance.isGameOver;
+        if (isGameOver) {
+            Destroy(gameObject);
+        }
+
         switch (currentState) {
             case State.Wandering:
                 // Chose random position to walk to

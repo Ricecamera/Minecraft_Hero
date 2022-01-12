@@ -38,7 +38,7 @@ public class Wave
 public class GameManager : MonoBehaviour
 {
     private static int MAX_PLAYER_LIFE = 10;
-    private static int MAX_AIRDROPS = 5;
+    private static int MAX_AIRDROPS = 4;
     private static float AIRDROP_STARTING_Y = 50f;
 
     public static GameManager instance = null;    // static instance of GameManager which allows it to be accessed by any other script.
@@ -54,9 +54,11 @@ public class GameManager : MonoBehaviour
     public float playerSpawnDelay = 3f;
     public float airDropSpawnTime = 5f;
     public int level = 0;
+    public long score = 0;
     public bool isGameOver = false;
 
     // Object References
+    private UIManager UImanager;
     public Board boardManager;
     public Transform[] enemySpawnPoint;
     public Zombie zombiePrefab;
@@ -75,45 +77,38 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Player playerEntity = Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        playerEntity.OnDeath.AddListener(OnPlayerDeath);
-        if (OnPlayerSpawn == null) {
-            OnPlayerSpawn = new UnityEvent();
-        }
+        UImanager = GameObject.Find("UI").GetComponent<UIManager>();
+        Reset();
+        SpawnPlayer(new Vector3(0, 0, 0));
         NextWave();
         StartCoroutine(SpawnAirDrop());
     }
 
     void Update()
     {
-        if (isGameOver)
-        {
-            //gameOverText.gameObject.SetActive(true);
-            return;
-        }
     }
+
 
     private void NextWave() {
         level++;
         currentWave = new Wave(level);
         enemiesRemainingToSpawn = currentWave.numberOfEnemies;
         enemiesRemainingAlive = enemiesRemainingToSpawn;
+        
+        // Clear wave score
+        if (level > 1) {
+            score += 1500 + 250*level;
+            UImanager.UpdateScore(score);
+        }
 
         // Create Timer for spawning enemies
         StartCoroutine(SpawnWave(currentWave)); 
     }
 
-    private Vector3 GetRandomPosition() {
-        float xBound = CameraManager.instance.Bound.x;
-        float zBound = CameraManager.instance.Bound.z;
-
-        float xPos = Random.Range(-xBound + 5, xBound - 5);
-        float zPos = Random.Range(-zBound + 5, zBound - 5);
-        return new Vector3(xPos, 0, zPos);
-    }
-
     private void OnEnemyDeath() {
         enemiesRemainingAlive--;
+        score += 150;
+        UImanager.UpdateScore(score);
 
         if (enemiesRemainingAlive == 0) {
             NextWave();
@@ -128,14 +123,19 @@ public class GameManager : MonoBehaviour
         }
 
         playerLife--;
+        UImanager.UpdateLife(playerLife);
         StartCoroutine(SpawnPlayer());
     }
 
     private void OnAirDropDestroy() {
-        if (currentAirDrop > 0) currentAirDrop--;
+        if (currentAirDrop > 0) {
+            currentAirDrop--;
+            score += 300;
+            UImanager.UpdateScore(score);
+        }
     }
 
-    IEnumerator SpawnWave(Wave currentWave)
+    private IEnumerator SpawnWave(Wave currentWave)
     {
         print("Wave: " + currentWave.waveLevel);
         int n = currentWave.numberOfEnemies;
@@ -144,7 +144,11 @@ public class GameManager : MonoBehaviour
         for (int i=0; i < n; i++)
         {
             // If game is over, Don't spawn zombie anymore
-            if (isGameOver) break;
+            if (isGameOver) {
+                enemiesRemainingToSpawn = 0;
+                yield return null;
+                break;
+            }
 
             enemiesRemainingToSpawn--;
 
@@ -160,14 +164,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnPlayer() {
+    private IEnumerator SpawnPlayer() {
         yield return new WaitForSeconds(playerSpawnDelay);
-        OnPlayerSpawn?.Invoke();
         Player playerEntity = Instantiate(playerPrefab, GetRandomPosition(), Quaternion.identity);
+        playerEntity.OnDeath.AddListener(OnPlayerDeath);
+        OnPlayerSpawn?.Invoke();
+    }
+
+    private void SpawnPlayer(Vector3 spawnPostion) {
+        if (OnPlayerSpawn == null)
+            OnPlayerSpawn = new UnityEvent();
+        Player playerEntity = Instantiate(playerPrefab, spawnPostion, Quaternion.identity);
         playerEntity.OnDeath.AddListener(OnPlayerDeath);
     }
 
-    IEnumerator SpawnAirDrop() {
+    private IEnumerator SpawnAirDrop() {
         // Prevent from spawning an airdrop on game starting
         yield return new WaitForSeconds(airDropSpawnTime * 2);
 
@@ -188,9 +199,32 @@ public class GameManager : MonoBehaviour
     }
 
     public void IncresePlayerLife(int addLife) {
-        if (playerLife + addLife <= MAX_PLAYER_LIFE)
+        if (playerLife + addLife <= MAX_PLAYER_LIFE) {
             playerLife += addLife;
+            UImanager.UpdateLife(playerLife);
+        }
         else
             playerLife = MAX_PLAYER_LIFE;
+        score += 500;
+        UImanager.UpdateScore(score);
+    }
+
+    public Vector3 GetRandomPosition() {
+        float xBound = CameraManager.instance.Bound.x;
+        float zBound = CameraManager.instance.Bound.z;
+
+        float xPos = Random.Range(-xBound + 5, xBound - 5);
+        float zPos = Random.Range(-zBound + 5, zBound - 5);
+        return new Vector3(xPos, 0, zPos);
+    }
+
+    public void Reset() {
+        playerLife = 3;
+        currentAirDrop = 0;
+        level = 0;
+        score = 0;
+        isGameOver = false;
+        UImanager.UpdateScore(score);
+        UImanager.UpdateLife(playerLife);
     }
 }

@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba0aa183bd8c8c24ca5b2b67ddd87cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunId: 3
+  gunTitle: RPG
   muzzleVelocity: 15
   fireRate: 1
   reloadTime: 3
@@ -103,9 +105,10 @@ MonoBehaviour:
   firePoint: {fileID: 7424268092342606764}
   bulletPrefab: {fileID: 8597224466476782253, guid: b65ba5018ea219c4888c68483e51ec17,
     type: 3}
+  icon: {fileID: 0}
   fireSound: {fileID: 0}
   reloadSound: {fileID: 0}
-  totalAmmo: 2
+  totalAmmo: 8
   reserveAmmo: 0
 --- !u!1 &7424268092342606765
 GameObject:

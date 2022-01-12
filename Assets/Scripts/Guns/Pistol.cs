@@ -26,6 +26,7 @@ public class Pistol : Shooting
 
             // reduce bullets in magazine by one
             currentMagazine--;
+            OnShoot?.Invoke(currentMagazine, -1);
             ResetTimer();
         }
     }
@@ -37,6 +38,7 @@ public class Pistol : Shooting
         isReloading = true;
         yield return new WaitForSeconds(reloadTime);
         currentMagazine = magazineSize;
+        OnShoot?.Invoke(currentMagazine, -1);
         isReloading = false;
     }
 }

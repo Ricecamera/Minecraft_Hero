@@ -46,7 +46,8 @@ public class Player : LivingEntity {
     // Update is called once per frame
     private void Update()
     {
-        if (!dead) {
+        bool isGameOver = GameManager.instance.isGameOver;
+        if (!dead && !isGameOver) {
             // Change 2d input vector to 3d vector;
             Vector3 moveDirection = new Vector3(_input.inputVector.x, 0, _input.inputVector.y);
             Vector3 moveVelocity = moveDirection.normalized * movementSpeed;

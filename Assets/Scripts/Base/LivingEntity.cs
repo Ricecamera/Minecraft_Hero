@@ -39,6 +39,7 @@ public class LivingEntity : MonoBehaviour, IDamageable {
     public virtual void Die(float delay) {
         dead = true;
         OnDeath?.Invoke();
+        OnDeath.RemoveAllListeners();
         GameObject.Destroy(gameObject, delay);
     }
 

@@ -16,7 +16,12 @@ public class Item : MonoBehaviour
         Invoke("DestroySelf", destroyDelay);
     }
 
-    private void FixedUpdate() {
+    void Update() {
+        bool isGameOver = GameManager.instance.isGameOver;
+        if (isGameOver) {
+            Destroy(gameObject);
+        }
+
         transform.Rotate(0, angularVelocity * Time.deltaTime, 0);
     }
 

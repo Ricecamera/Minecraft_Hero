@@ -68,6 +68,7 @@ public class Shotgun : AmmoGun
 
             // reduce bullets in magazine by one
             currentMagazine--;
+            OnShoot?.Invoke(currentMagazine, reserveAmmo);
             ResetTimer();
         }
 

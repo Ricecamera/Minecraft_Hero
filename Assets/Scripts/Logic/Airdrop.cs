@@ -31,7 +31,11 @@ public class Airdrop : MonoBehaviour, IDamageable {
         boxRb.isKinematic = false;
     }
 
-    void FixedUpdate() {
+    void Update() {
+        bool isGameOver = GameManager.instance.isGameOver;
+        if (isGameOver) {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision) {
@@ -77,6 +81,7 @@ public class Airdrop : MonoBehaviour, IDamageable {
     public void Destroy() {
         Instantiate(smokeVfx, transform.position, Quaternion.identity);
         OnDestroy?.Invoke();
+        OnDestroy.RemoveAllListeners();
         GameObject.Destroy(gameObject);
     }
 

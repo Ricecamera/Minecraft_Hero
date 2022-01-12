@@ -6,9 +6,7 @@ using UnityEngine;
 
 public abstract class AmmoGun : Shooting {
 
-    [SerializeField]
-    protected int totalAmmo;
-
+    public int totalAmmo;
     public int reserveAmmo;
 
     protected override void Start() {
@@ -37,6 +35,7 @@ public abstract class AmmoGun : Shooting {
             currentMagazine = reserveAmmo;
             reserveAmmo = 0;
         }
+        OnShoot?.Invoke(currentMagazine, reserveAmmo);
         isReloading = false;
     }
 

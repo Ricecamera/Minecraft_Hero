@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 408568950580271444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 6.77, z: -0.563}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 596142979579261228}
   m_Father: {fileID: 0}
@@ -95,16 +95,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd89f03e23f676e4f9e5ab153c112488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunId: 2
+  gunTitle: Shotgun
   muzzleVelocity: 10
   fireRate: 1
   reloadTime: 2.5
   currentMagazine: 0
-  magazineSize: 8
+  magazineSize: 6
   firePoint: {fileID: 596142979579261228}
   bulletPrefab: {fileID: 0}
+  icon: {fileID: 0}
   fireSound: {fileID: 0}
   reloadSound: {fileID: 0}
-  totalAmmo: 8
+  totalAmmo: 24
   reserveAmmo: 0
   shotDistance: 8
   coneAngleWidth: 60

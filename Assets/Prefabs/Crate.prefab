@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf72c6b58e8d02446a17d5d3f7bc3199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durability: 20
+  durability: 5
   itemYOffset: 2.2
   destroyDelay: 0.5
   dropDamageRadius: 5
@@ -151,6 +151,8 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 1152
+  smokeVfx: {fileID: 5821563357602333537, guid: add86381973d91747a33991fab57d260,
+    type: 3}
   OnDestroy:
     m_PersistentCalls:
       m_Calls: []

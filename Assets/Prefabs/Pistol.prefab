@@ -95,14 +95,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e06389620ec6934fb6a785f96208053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunId: 0
+  gunTitle: Pistol
   muzzleVelocity: 30
   fireRate: 1.5
   reloadTime: 1.75
   currentMagazine: 0
-  magazineSize: 8
+  magazineSize: 10
   firePoint: {fileID: 6204911818588723027}
   bulletPrefab: {fileID: 3558113473106955990, guid: 77ef94235581468448b4c0fd12648f49,
     type: 3}
+  icon: {fileID: 0}
   fireSound: {fileID: 8300000, guid: 9afa7b0463ae3254287649ced1fee9ef, type: 3}
   reloadSound: {fileID: 8300000, guid: 15d7c727e8b9d4d909758851d8cc7cac, type: 3}
 --- !u!1 &9166889911137128556

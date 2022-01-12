@@ -13,6 +13,8 @@ public class SubMachineGun : AmmoGun {
 
             // reduce bullets in magazine by one
             currentMagazine--;
+            OnShoot?.Invoke(currentMagazine, reserveAmmo);
+
             ResetTimer();
         }
 

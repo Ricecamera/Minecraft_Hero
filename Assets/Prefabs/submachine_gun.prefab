@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7753bd3f010d94b489bf1dd61b55c0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunId: 1
+  gunTitle: Tootii
   muzzleVelocity: 50
   fireRate: 8
   reloadTime: 1.5
@@ -133,7 +135,8 @@ MonoBehaviour:
   firePoint: {fileID: 1423505039918034596}
   bulletPrefab: {fileID: 8140613407413707590, guid: 902a8e4dcc3bfba47ac86461c5e1ef0f,
     type: 3}
+  icon: {fileID: 0}
   fireSound: {fileID: 0}
   reloadSound: {fileID: 0}
-  totalAmmo: 25
+  totalAmmo: 100
   reserveAmmo: 0

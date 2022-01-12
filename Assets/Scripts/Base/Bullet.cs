@@ -29,6 +29,13 @@ public class Bullet : MonoBehaviour {
         }
     }
 
+    protected void Update() {
+        bool isGameOver = GameManager.instance.isGameOver;
+        if (isGameOver) {
+            Destroy(gameObject);
+        }
+    }
+
     protected void FixedUpdate() {
         float xBound = CameraManager.instance.Bound.x;
         float zBound = CameraManager.instance.Bound.z;
