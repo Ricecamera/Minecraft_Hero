@@ -116,18 +116,18 @@ public class Player : LivingEntity {
             HeathPotion potion = item as HeathPotion;
             float newHeath = health += potion.HealAmount;
             setHealth(newHeath);
-            AudioManager.instance.PlaySingle(drinkingSound);
+            AudioManager.instance.PlaySingle(2, drinkingSound);
         }
         else if (item.CompareTag("LifeUP")) {
-            //GameManager.instance.IncresePlayerLife(1);
             float newHeath = maxHealth;
             setHealth(newHeath);
-            AudioManager.instance.PlaySingle(lifeUpSound);
+            GameManager.instance.IncresePlayerLife(1);
+            AudioManager.instance.PlaySingle(2, lifeUpSound);
         }
         else if (item.CompareTag("WeaponDrop")){
             AmmoGun selectedGun = Randomizer.instance.getRandomGun();
             gunController.AddGun(selectedGun);
-            AudioManager.instance.PlaySingle(1, weaponPickupSound);
+            AudioManager.instance.PlaySingle(2, weaponPickupSound);
         }
         return;
     }

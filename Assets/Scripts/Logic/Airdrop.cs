@@ -20,8 +20,8 @@ public class Airdrop : MonoBehaviour, IDamageable {
 
     public Item itemToSpawn = null;
     public LayerMask collisionMask;
-    public UnityEvent OnDestroy;
-
+    public UnityEvent<int> OnDestroy;
+    public int gridIndex;
 
     void Start() {
         itemToSpawn = Randomizer.instance.getRandomItem();
@@ -77,7 +77,7 @@ public class Airdrop : MonoBehaviour, IDamageable {
     }
 
     public void Destroy() {
-        OnDestroy?.Invoke();
+        OnDestroy?.Invoke(gridIndex);
         OnDestroy.RemoveAllListeners();
         GameObject.Destroy(gameObject);
     }

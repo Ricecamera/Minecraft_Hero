@@ -56,7 +56,6 @@ public class GunController : MonoBehaviour
     }
 
     private void EquipGun(int index) {
-        weaponInventory[index].OnShoot.RemoveListener(UImanager.UpdateAmmo);
         for (int i = 0; i < weaponInventory.Count; i++) {
             if (weaponInventory[i] != null) {
                 if (i == index)
@@ -65,9 +64,12 @@ public class GunController : MonoBehaviour
                     weaponInventory[i].gameObject.SetActive(false);
             }
         }
+
+        // Add listener to the new gun
+        equippedGunIdx = index;
         weaponInventory[index].OnShoot.AddListener(UImanager.UpdateAmmo);
 
-        equippedGunIdx = index;
+        
         var gunId = weaponInventory[index].gunId;
         if (gunId == 1) {
             playerAnim.SetInteger("WeaponType_int", 2);
@@ -86,6 +88,7 @@ public class GunController : MonoBehaviour
     private void DropCurrentGun(int toDropIdx) {
         // Destroy gameObject
         Shooting equippedGun = weaponInventory[equippedGunIdx];
+        weaponInventory[equippedGunIdx].OnShoot.RemoveListener(UImanager.UpdateAmmo);
         Destroy(equippedGun.gameObject);
 
         // Shift left
@@ -110,7 +113,10 @@ public class GunController : MonoBehaviour
             if (ammoGun != null && ammoGun.IsBulletEmpty()) {
                 DropCurrentGun(equippedGunIdx);
             }
+
+            UImanager.UpdateGun(equippedGun, equippedGunIdx+1);
         }
+
     }
 
     public bool AddGun(Shooting gunToAdd) {
@@ -146,6 +152,9 @@ public class GunController : MonoBehaviour
             }
 
             if (selectIdx == (currentGuns - 1) || (selectIdx != -1 && selectIdx == foundIdx)) {
+                // Remove listener from the old gun
+                weaponInventory[equippedGunIdx].OnShoot.RemoveListener(UImanager.UpdateAmmo);
+                // Equip the new gun
                 UImanager.UpdateGun(weaponInventory[selectIdx], selectIdx + 1);
                 EquipGun(selectIdx);
             }
@@ -157,6 +166,9 @@ public class GunController : MonoBehaviour
 
     public void ChangeGun(int direction) {
         if (weaponInventory[equippedGunIdx].IsReloading) return;
+
+        // Remove listener from the old gun
+        weaponInventory[equippedGunIdx].OnShoot.RemoveListener(UImanager.UpdateAmmo);
 
         int newIdx = selectIdx + direction;
         if (newIdx >= MAX_GUN)

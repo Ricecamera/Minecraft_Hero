@@ -60,7 +60,6 @@ public abstract class Shooting : MonoBehaviour
     public abstract void Shoot();
 
     public bool CanShoot() {
-        //Debug.Log(timer);
         return (timer) > msBetweenShots;
     }
 

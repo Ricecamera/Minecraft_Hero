@@ -14,14 +14,12 @@ public class Shotgun : AmmoGun
     private void FireBullets() {
         float dTheta = coneAngleWidth / (bulletCount - 1);
         for (int i = 1; i <= bulletCount; i++) {
+            // Calculate the radian the relativeVec have to be rotate
+            float deg = dTheta * (i - (bulletCount + 1) / 2);
+
             // Spawn bullet
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            
-
-            // Calculate the radian the relativeVec have to be rotate
-            float radian = Mathf.Deg2Rad * (dTheta * (i - (bulletCount + 1) / 2));
-            bullet.transform.Rotate(Vector3.up, radian);
-
+            bullet.transform.Rotate(Vector3.up, deg);
             bullet.Speed = muzzleVelocity;
 
         }

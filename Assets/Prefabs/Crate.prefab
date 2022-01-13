@@ -144,15 +144,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durability: 5
   itemYOffset: 2.2
-  destroyDelay: 0.5
   dropDamageRadius: 5
   pushForce: 10
   itemToSpawn: {fileID: 0}
   collisionMask:
     serializedVersion: 2
     m_Bits: 1152
-  smokeVfx: {fileID: 5821563357602333537, guid: add86381973d91747a33991fab57d260,
-    type: 3}
   OnDestroy:
     m_PersistentCalls:
       m_Calls: []
+  gridIndex: 0

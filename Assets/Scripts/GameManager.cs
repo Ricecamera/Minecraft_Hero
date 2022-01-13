@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
         UImanager = GameObject.Find("UI").GetComponent<UIManager>();
         Reset();
         SpawnPlayer(new Vector3(0, 0, 0));
-        //NextWave();
+        NextWave();
         StartCoroutine(SpawnAirDrop());
     }
 
@@ -127,9 +127,10 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnPlayer());
     }
 
-    private void OnAirDropDestroy() {
+    private void OnAirDropDestroy(int gridIndex) {
         if (currentAirDrop > 0) {
             currentAirDrop--;
+            boardManager.gridPositions[gridIndex].isVacant = true;
             score += 300;
             UImanager.UpdateScore(score);
         }
@@ -157,8 +158,8 @@ public class GameManager : MonoBehaviour
             Zombie spawnedEnemy = Instantiate(zombiePrefab, randomPoint.position, Quaternion.identity);
             spawnedEnemy.OnDeath.AddListener(OnEnemyDeath);
 
-            if (level > 10) {
-                spawnedEnemy.setHealth(5);
+            if (level > 6) {
+                spawnedEnemy.UpgradeZombie();
             }
             yield return new WaitForSeconds(delay);
         }
@@ -191,6 +192,7 @@ public class GameManager : MonoBehaviour
                 Vector3 spawnPos = new Vector3(currentGrid.Position.x, AIRDROP_STARTING_Y, currentGrid.Position.y);
                 GameObject box = Instantiate(boxPrefab, spawnPos, Quaternion.identity);
                 Airdrop airdrop = box.GetComponent<Airdrop>();
+                airdrop.gridIndex = randomIndex;
                 airdrop.OnDestroy.AddListener(OnAirDropDestroy);
                 currentAirDrop++;
             }
@@ -203,9 +205,12 @@ public class GameManager : MonoBehaviour
             playerLife += addLife;
             UImanager.UpdateLife(playerLife);
         }
-        else
+        else {
             playerLife = MAX_PLAYER_LIFE;
+            UImanager.UpdateLife(playerLife);
+        }
         score += 500;
+        Debug.Log(playerLife);
         UImanager.UpdateScore(score);
     }
 

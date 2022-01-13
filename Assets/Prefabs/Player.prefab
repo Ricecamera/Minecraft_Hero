@@ -198,7 +198,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   movementSpeed: 12
-  invicibleTime: 3
+  invicibleTime: 1.5
   deathParticle: {fileID: 7815425472194050862}
   playerAvatar: {fileID: 7815425472494472068}
   invincibleIndicator: {fileID: 5399755991780069867}

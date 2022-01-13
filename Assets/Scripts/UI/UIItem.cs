@@ -42,7 +42,7 @@ public class UIItem : MonoBehaviour
                 AmmoGun ammoGun = gun as AmmoGun;
                 newAmmo = ammoGun.reserveAmmo;
             }
-            Debug.Log("Add " + gun.gunTitle);
+            //Debug.Log("Add " + gun.gunTitle);
             UpdateText(newMag, newAmmo);
 
             this.gun.OnReload.AddListener(TriggerReloadCircle);
@@ -54,7 +54,7 @@ public class UIItem : MonoBehaviour
             }
             spriteImage.color = Color.clear;
             UpdateText(-1, -1);
-            Debug.Log("No gun");
+            //Debug.Log("No gun");
         }
         
     }

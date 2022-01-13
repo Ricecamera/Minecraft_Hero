@@ -24,8 +24,6 @@ public class PlayerController : MonoBehaviour
         float xBound = CameraManager.instance.Bound.x;
         float zBound = CameraManager.instance.Bound.z;
 
-        //print(xBound);
-        //print(zBound);
         if (targetPosition.x > xBound) {
             targetPosition.x = xBound;
         }
