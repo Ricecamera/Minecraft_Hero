@@ -62,6 +62,8 @@ public class Zombie : LivingEntity {
 
     void Update() {
         timer += Time.deltaTime;
+        Debug.Log("Enemy health" + (int) this.health);
+        Debug.Log("Enemy damage" + (int) this.damage);
 
         bool isGameOver = GameManager.instance.isGameOver;
         if (isGameOver) {
@@ -216,5 +218,10 @@ public class Zombie : LivingEntity {
         if (agent != null)
             agent.enabled = false;
         base.Die(delay);
+    }
+
+    public void UpgradeZombie() {
+        this.setHealth(maxHealth);
+        damage = 2;
     }
 }

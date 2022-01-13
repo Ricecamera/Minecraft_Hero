@@ -19,8 +19,10 @@ public class LivingEntity : MonoBehaviour, IDamageable {
         get {return dead;}
     }
 
-    protected virtual void Start() {
+    void Awake() {
         health = startingHealth;
+    }
+    protected virtual void Start() {
         if (OnDeath == null)
             OnDeath = new UnityEvent();
     }
@@ -32,6 +34,7 @@ public class LivingEntity : MonoBehaviour, IDamageable {
 
     public virtual void TakeDamage(float damage) {
         health -= damage;
+        print(health);
 
         if (health <= 0 && !dead) {
             
@@ -48,9 +51,9 @@ public class LivingEntity : MonoBehaviour, IDamageable {
 
     public void setHealth(float newHealth) {
         if (newHealth > 0)
-            health = (newHealth > maxHealth) ? maxHealth: newHealth;
+            this.health = (newHealth > maxHealth) ? maxHealth: newHealth;
         else
-            health = 1;
+            this.health = 1;
     }
 }
 
