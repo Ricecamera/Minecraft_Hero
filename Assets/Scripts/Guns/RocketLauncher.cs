@@ -24,6 +24,7 @@ public class RocketLauncher : AmmoGun
     public override void Shoot() {
         // check if current Time is able to shoot
         if (CanShoot() && !IsMagazineEmpty()) {
+            AudioManager.instance.PlaySingle(fireSound);
             currentRocket.Launch(muzzleVelocity);
 
             // reduce bullets in magazine by one

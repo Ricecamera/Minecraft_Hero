@@ -101,5 +101,6 @@ MonoBehaviour:
     m_Bits: 1664
   exposionRadius: 8
   exposionForce: 40
+  explosionSound: {fileID: 8300000, guid: ef2cde67276e7490e860213ae5393038, type: 3}
   exposionVfx: {fileID: 8117318027194989922, guid: 35b0789984f6ec949800395d032cc4d2,
     type: 3}

@@ -10,6 +10,9 @@ public class LivingEntity : MonoBehaviour, IDamageable {
 
     [SerializeField]
     protected float startingHealth, maxHealth;
+
+    [SerializeField]
+    protected float deathDelay = .75f;
     public UnityEvent OnDeath;
 
     public bool Dead {
@@ -31,7 +34,7 @@ public class LivingEntity : MonoBehaviour, IDamageable {
         health -= damage;
 
         if (health <= 0 && !dead) {
-            float deathDelay = .75f;
+            
             Die(deathDelay);
         }
     }

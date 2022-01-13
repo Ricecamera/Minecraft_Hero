@@ -12,6 +12,7 @@ TagManager:
   - Pistol
   - RPG
   - LongGun
+  - WeaponDrop
   layers:
   - Default
   - TransparentFX

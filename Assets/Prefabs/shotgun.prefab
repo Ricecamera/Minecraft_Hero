@@ -106,8 +106,8 @@ MonoBehaviour:
   firePoint: {fileID: 596142979579261228}
   bulletPrefab: {fileID: 0}
   icon: {fileID: 0}
-  fireSound: {fileID: 0}
-  reloadSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: 10960aeedce691e47ae5dd4d5d32b336, type: 3}
+  reloadSound: {fileID: 8300000, guid: 422b3d1c3b167de458f31dd398b48238, type: 3}
   OnShoot:
     m_PersistentCalls:
       m_Calls: []

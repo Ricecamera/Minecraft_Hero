@@ -95,8 +95,7 @@ public class Zombie : LivingEntity {
                 // Do something between attack
                 break;
             default:
-                if (agent != null) 
-                    agent.isStopped = true;
+                transform.Rotate(Vector3.forward, (90 / deathDelay) * Time.deltaTime);
                 timer = 0;
                 break;
         }
@@ -212,7 +211,10 @@ public class Zombie : LivingEntity {
 
     public override void Die(float delay) {
         currentState = State.Death;
+
         EnemySoundManager.instance.PlaySingle(moanSound);
+        if (agent != null)
+            agent.enabled = false;
         base.Die(delay);
     }
 }

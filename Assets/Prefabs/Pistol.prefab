@@ -108,7 +108,7 @@ MonoBehaviour:
     type: 3}
   icon: {fileID: 0}
   fireSound: {fileID: 8300000, guid: 9afa7b0463ae3254287649ced1fee9ef, type: 3}
-  reloadSound: {fileID: 8300000, guid: 15d7c727e8b9d4d909758851d8cc7cac, type: 3}
+  reloadSound: {fileID: 8300000, guid: d1acadacc60920a408475f041ceaa502, type: 3}
   OnShoot:
     m_PersistentCalls:
       m_Calls: []

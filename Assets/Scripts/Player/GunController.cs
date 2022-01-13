@@ -132,21 +132,32 @@ public class GunController : MonoBehaviour
             equippedGun.transform.parent = weaponHold;
             equippedGun.gameObject.SetActive(false);
             
-            int FoundIdx = HasDuplicateGun(gunId);
-            if (FoundIdx != -1) {
-                Destroy(weaponInventory[FoundIdx].gameObject);
-                weaponInventory[FoundIdx] = equippedGun;
+            int foundIdx = HasDuplicateGun(gunId);
+            if (foundIdx != -1) {
+
+                if (weaponInventory[foundIdx] is AmmoGun) {
+                    AmmoGun temp = weaponInventory[foundIdx] as AmmoGun;
+                    temp.SetFullAmmo();
+                }
             }
             else {
                 weaponInventory[currentGuns] = equippedGun;
                 currentGuns++;
             }
+
+            if (selectIdx == (currentGuns - 1) || (selectIdx != -1 && selectIdx == foundIdx)) {
+                UImanager.UpdateGun(weaponInventory[selectIdx], selectIdx + 1);
+                EquipGun(selectIdx);
+            }
+                
             return true;
         }
         return false;
     }
 
     public void ChangeGun(int direction) {
+        if (weaponInventory[equippedGunIdx].IsReloading) return;
+
         int newIdx = selectIdx + direction;
         if (newIdx >= MAX_GUN)
             newIdx = 0;

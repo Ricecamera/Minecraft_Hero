@@ -35,10 +35,20 @@ public abstract class Shooting : MonoBehaviour
     public UnityEvent<int, int> OnShoot;
     public UnityEvent<float> OnReload;
 
+    public bool IsReloading {
+        get {
+            return isReloading;
+        }
+    }
+
     protected virtual void Awake() {
         icon = Resources.Load<Sprite>("Sprites/" + gunTitle);
-        timer = 0;
+    }
+
+    protected void Start() {
+        isReloading = false;
         msBetweenShots = 1 / fireRate;
+        timer = msBetweenShots;
         if (OnShoot == null)
             OnShoot = new UnityEvent<int, int>();
     }

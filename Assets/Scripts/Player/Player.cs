@@ -72,9 +72,11 @@ public class Player : LivingEntity {
 
             if (_input.Q) {
                 gunController.ChangeGun(-1);
+                AudioManager.instance.PlaySingle(1, weaponPickupSound);
             }
             else if (_input.E) {
                 gunController.ChangeGun(1);
+                AudioManager.instance.PlaySingle(1, weaponPickupSound);
             }
         }
     }
@@ -121,6 +123,11 @@ public class Player : LivingEntity {
             float newHeath = maxHealth;
             setHealth(newHeath);
             AudioManager.instance.PlaySingle(lifeUpSound);
+        }
+        else if (item.CompareTag("WeaponDrop")){
+            AmmoGun selectedGun = Randomizer.instance.getRandomGun();
+            gunController.AddGun(selectedGun);
+            AudioManager.instance.PlaySingle(1, weaponPickupSound);
         }
         return;
     }

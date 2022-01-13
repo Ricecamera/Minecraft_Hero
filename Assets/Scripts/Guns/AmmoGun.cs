@@ -26,6 +26,7 @@ public abstract class AmmoGun : Shooting {
         // Prevent this IEnumerator from called multiple time
         isReloading = true;
         OnReload?.Invoke(reloadTime);
+        AudioManager.instance.PlaySingle(1, reloadSound);
         yield return new WaitForSeconds(reloadTime);
         if (reserveAmmo >= magazineSize) {
             currentMagazine = magazineSize;
@@ -42,5 +43,10 @@ public abstract class AmmoGun : Shooting {
 
     public bool IsBulletEmpty() {
         return currentMagazine == 0 && reserveAmmo == 0;
+    }
+
+    public void SetFullAmmo() {
+        currentMagazine = magazineSize;
+        reserveAmmo = totalAmmo - magazineSize;
     }
 }

@@ -193,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 3
   maxHealth: 10
+  deathDelay: 0.75
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -204,7 +205,7 @@ MonoBehaviour:
   hurtSound: {fileID: 8300000, guid: b00b1a9aa54e3244f9e402539a0870d7, type: 3}
   drinkingSound: {fileID: 8300000, guid: a4fac655efb9e114db2e40400a0a5154, type: 3}
   lifeUpSound: {fileID: 8300000, guid: 9408094e8aa324d4db69d73648dcba87, type: 3}
-  weaponPickupSound: {fileID: 0}
+  weaponPickupSound: {fileID: 8300000, guid: 27dddadd1f927ea4f82969facebbc2e4, type: 3}
 --- !u!114 &7815425473369578820
 MonoBehaviour:
   m_ObjectHideFlags: 0

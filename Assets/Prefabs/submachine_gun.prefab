@@ -137,8 +137,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8140613407413707590, guid: 902a8e4dcc3bfba47ac86461c5e1ef0f,
     type: 3}
   icon: {fileID: 0}
-  fireSound: {fileID: 0}
-  reloadSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: 8c3439c3e39b2b24a88fe6ff16bfa1cc, type: 3}
+  reloadSound: {fileID: 8300000, guid: c24fb259fe2c4bd4abfd88454c82e8ca, type: 3}
   OnShoot:
     m_PersistentCalls:
       m_Calls: []

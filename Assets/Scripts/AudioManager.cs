@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class AudioManager : MonoBehaviour {
     //Drag a reference to the audio source which will play the sound effects.
-    public AudioSource efxSource;
+    public AudioSource[] efxSources;
     //Drag a reference to the audio source which will play the music.
     public AudioSource musicSource;
     //Allows other scripts to call functions from the SoundManager
@@ -30,30 +30,39 @@ public class AudioManager : MonoBehaviour {
 
 
     //Used to play single sound clips.
-    public void PlaySingle(AudioClip clip) {
+    public void PlaySingle(int index, AudioClip clip) {
+        if (index > efxSources.Length) return;
         //Set the clip of our efxSource audio source to the clip passed in as a parameter.
-        efxSource.clip = clip;
+        efxSources[index].clip = clip;
 
         //Play the clip.
-        efxSource.Play();
+        efxSources[index].Play();
     }
 
+    public void PlaySingle(AudioClip clip) {
+        //Set the clip of our efxSource audio source to the clip passed in as a parameter.
+        efxSources[0].clip = clip;
+
+        //Play the clip.
+        efxSources[0].Play();
+    }
 
     //RandomizeSfx chooses randomly between various audio clips and slightly changes their pitch.
     public void RandomizeSfx(params AudioClip[] clips) {
-        //Generate a random number between 0 and the length of our array of clips passed in.
         int randomIndex = Random.Range(0, clips.Length);
-
-        //Choose a random pitch to play back our clip at between our high and low pitch ranges.
         float randomPitch = Random.Range(lowPitchRange, highPitchRange);
 
-        //Set the pitch of the audio source to the randomly chosen pitch.
-        efxSource.pitch = randomPitch;
+        efxSources[0].pitch = randomPitch;
+        efxSources[0].clip = clips[randomIndex];
+        efxSources[0].Play();
+    }
 
-        //Set the clip to the clip at our randomly chosen index.
-        efxSource.clip = clips[randomIndex];
+    public void RandomizeSfx(int index, params AudioClip[] clips) {
+        int randomIndex = Random.Range(0, clips.Length);
+        float randomPitch = Random.Range(lowPitchRange, highPitchRange);
 
-        //Play the clip.
-        efxSource.Play();
+        efxSources[index].pitch = randomPitch;
+        efxSources[index].clip = clips[randomIndex];
+        efxSources[index].Play();
     }
 }

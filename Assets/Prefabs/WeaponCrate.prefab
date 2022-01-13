@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 1759197318127393705}
   - component: {fileID: 1790310002057753055}
   - component: {fileID: 1746573929721351477}
-  - component: {fileID: 1746573929721351474}
+  - component: {fileID: 1403236358488746748}
   m_Layer: 0
   m_Name: WeaponCrate
-  m_TagString: Untagged
+  m_TagString: WeaponDrop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 1.3, z: 1.3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1746573929721351474
+--- !u!114 &1403236358488746748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,8 +120,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1745282784821165349}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f0bfea268bf0eb409448a3b91a120f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 166d7c8d4980daa4c97681c4879e29d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   angularVelocity: 50
-  destroyDelay: 15
+  destroyDelay: 60

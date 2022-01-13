@@ -100,15 +100,15 @@ MonoBehaviour:
   muzzleVelocity: 15
   fireRate: 1
   attackRange: 15
-  reloadTime: 2
+  reloadTime: 2.7
   currentMagazine: 0
   magazineSize: 1
   firePoint: {fileID: 7424268092342606764}
   bulletPrefab: {fileID: 8597224466476782253, guid: b65ba5018ea219c4888c68483e51ec17,
     type: 3}
   icon: {fileID: 0}
-  fireSound: {fileID: 0}
-  reloadSound: {fileID: 0}
+  fireSound: {fileID: 8300000, guid: b4df6eff6e0f4cc4db6c48044d391fe2, type: 3}
+  reloadSound: {fileID: 8300000, guid: 44584de2c097eec4aa487af24e882c8e, type: 3}
   OnShoot:
     m_PersistentCalls:
       m_Calls: []

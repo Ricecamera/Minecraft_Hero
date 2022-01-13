@@ -12,7 +12,6 @@ public class Pistol : Shooting
     public override void Shoot() {
         if (IsMagazineEmpty()) {
             if (!isReloading) {
-                AudioManager.instance.PlaySingle(reloadSound);
                 StartCoroutine(Reload());
             }
             return;
@@ -37,6 +36,7 @@ public class Pistol : Shooting
         // Prevent this IEnumerator from called multiple time
         isReloading = true;
         OnReload?.Invoke(reloadTime);
+        AudioManager.instance.PlaySingle(1, reloadSound);
         yield return new WaitForSeconds(reloadTime);
         currentMagazine = magazineSize;
         OnShoot?.Invoke(currentMagazine, -1);

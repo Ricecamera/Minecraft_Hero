@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 3
-  maxHealth: 0
+  maxHealth: 5
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -173,12 +173,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0c44d05894ea2fa4d973588775702446,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c44d05894ea2fa4d973588775702446,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c44d05894ea2fa4d973588775702446,
         type: 3}

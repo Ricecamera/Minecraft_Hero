@@ -38,7 +38,7 @@ public class Wave
 public class GameManager : MonoBehaviour
 {
     private static int MAX_PLAYER_LIFE = 10;
-    private static int MAX_AIRDROPS = 4;
+    private static int MAX_AIRDROPS = 20;
     private static float AIRDROP_STARTING_Y = 50f;
 
     public static GameManager instance = null;    // static instance of GameManager which allows it to be accessed by any other script.

@@ -74,7 +74,6 @@ public class Shotgun : AmmoGun
 
         if (IsMagazineEmpty()) {
             if (!IsBulletEmpty() && !isReloading) {
-                AudioManager.instance.PlaySingle(reloadSound);
                 StartCoroutine(Reload());
             }
             return;

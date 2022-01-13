@@ -14,14 +14,12 @@ public class Airdrop : MonoBehaviour, IDamageable {
     private Rigidbody boxRb;
 
     public float itemYOffset = 2.2f;
-    public float destroyDelay = .25f;
     public float dropDamageRadius = 3f;
     public float pushForce = 5f;
     
 
     public Item itemToSpawn = null;
     public LayerMask collisionMask;
-    public ParticleSystem smokeVfx;
     public UnityEvent OnDestroy;
 
 
@@ -74,12 +72,11 @@ public class Airdrop : MonoBehaviour, IDamageable {
         if (durability <= 0 && !destroyed) {
             destroyed = true;
             SpawnItem();
-            Invoke("Destroy", destroyDelay);
+            Destroy();
         }
     }
 
     public void Destroy() {
-        Instantiate(smokeVfx, transform.position, Quaternion.identity);
         OnDestroy?.Invoke();
         OnDestroy.RemoveAllListeners();
         GameObject.Destroy(gameObject);
