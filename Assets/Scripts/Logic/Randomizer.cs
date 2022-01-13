@@ -24,19 +24,18 @@ public class Randomizer : MonoBehaviour
     }
 
     public AmmoGun getRandomGun() {
-        //float value = Random.Range(0f, 1f);
-        //AmmoGun selectedGun;
-        //if (value <= machineGunChance) {
-        //    selectedGun = containGuns[0];
-        //}
-        //else if (machineGunChance < value && value < machineGunChance + shotgunChance) {
-        //    selectedGun = containGuns[1];
-        //}
-        //else {
-        //    selectedGun = containGuns[2];
-        //}
-        //return selectedGun;
-        return containGuns[0];
+        float value = Random.Range(0f, 1f);
+        AmmoGun selectedGun;
+        if (value <= machineGunChance) {
+            selectedGun = containGuns[0];
+        }
+        else if (machineGunChance < value && value < machineGunChance + shotgunChance) {
+            selectedGun = containGuns[1];
+        }
+        else {
+            selectedGun = containGuns[2];
+        }
+        return selectedGun;
     }
 
     public Item getRandomItem() {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5549654727369020574}
   - component: {fileID: 1449776463771541635}
   - component: {fileID: 3558113473106955990}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bullet
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
@@ -77,10 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901461e39b7496546aac26db30bf294e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
+  damage: 1
   collisionMask:
     serializedVersion: 2
     m_Bits: 1536
-  damage: 1
 --- !u!1001 &432733612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,6 +92,10 @@ PrefabInstance:
     - target: {fileID: 191114, guid: 834c99069a124aa439d5795c3579843b, type: 3}
       propertyPath: m_Name
       value: FX_DirtSplatter
+      objectReference: {fileID: 0}
+    - target: {fileID: 191114, guid: 834c99069a124aa439d5795c3579843b, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 421170, guid: 834c99069a124aa439d5795c3579843b, type: 3}
       propertyPath: m_RootOrder
@@ -174,6 +179,10 @@ PrefabInstance:
     - target: {fileID: 189306, guid: f127d05270a025740aac64185803fd55, type: 3}
       propertyPath: m_Name
       value: FieldGunRound_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 189306, guid: f127d05270a025740aac64185803fd55, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 480310, guid: f127d05270a025740aac64185803fd55, type: 3}
       propertyPath: m_RootOrder

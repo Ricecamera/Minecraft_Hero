@@ -97,14 +97,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunId: 2
   gunTitle: Shotgun
-  muzzleVelocity: 10
+  muzzleVelocity: 30
   fireRate: 1
   attackRange: 5
   reloadTime: 2.25
   currentMagazine: 0
   magazineSize: 6
   firePoint: {fileID: 596142979579261228}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 3558113473106955990, guid: 77ef94235581468448b4c0fd12648f49,
+    type: 3}
   icon: {fileID: 0}
   fireSound: {fileID: 8300000, guid: 10960aeedce691e47ae5dd4d5d32b336, type: 3}
   reloadSound: {fileID: 8300000, guid: 422b3d1c3b167de458f31dd398b48238, type: 3}
@@ -116,10 +117,8 @@ MonoBehaviour:
       m_Calls: []
   totalAmmo: 24
   reserveAmmo: 0
-  shotDistance: 8
   coneAngleWidth: 60
-  rayCount: 7
-  shotDamage: 2
+  bulletCount: 7
   collisionMask:
     serializedVersion: 2
     m_Bits: 1536
