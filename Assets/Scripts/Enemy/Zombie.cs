@@ -62,9 +62,6 @@ public class Zombie : LivingEntity {
 
     void Update() {
         timer += Time.deltaTime;
-        Debug.Log("Enemy health" + (int) this.health);
-        Debug.Log("Enemy damage" + (int) this.damage);
-
         bool isGameOver = GameManager.instance.isGameOver;
         if (isGameOver) {
             Destroy(gameObject);
@@ -143,7 +140,7 @@ public class Zombie : LivingEntity {
     IEnumerator Attack() {
         // Set state to attcking and disenble pathfinder
         currentState = State.Attacking;
-        agent.enabled = false;
+        agent.isStopped = true;
 
         Vector3 originalPosition = transform.position;
         Vector3 dirToTarget = (target.position - transform.position).normalized;
@@ -173,7 +170,7 @@ public class Zombie : LivingEntity {
 
         // Set back to Chasing state and enable pathfinder
         currentState = State.Chasing;
-        agent.enabled = true;
+        agent.isStopped = false;
     }
 
     private void OnTargetDeath() {

@@ -34,7 +34,6 @@ public class LivingEntity : MonoBehaviour, IDamageable {
 
     public virtual void TakeDamage(float damage) {
         health -= damage;
-        print(health);
 
         if (health <= 0 && !dead) {
             
