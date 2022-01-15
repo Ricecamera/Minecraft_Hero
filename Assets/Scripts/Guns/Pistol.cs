@@ -11,7 +11,7 @@ public class Pistol : Shooting
 
     public override void Shoot() {
         if (IsMagazineEmpty()) {
-            if (!isReloading) {
+            if (!isReloading && gameObject) {
                 StartCoroutine(Reload());
             }
             return;

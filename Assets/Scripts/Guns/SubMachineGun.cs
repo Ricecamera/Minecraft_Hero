@@ -6,6 +6,13 @@ public class SubMachineGun : AmmoGun {
     // Start is called before the first frame update
 
     public override void Shoot() {
+
+        if (IsMagazineEmpty() && gameObject) {
+            if (!IsBulletEmpty() && !isReloading) {
+                StartCoroutine(Reload());
+            }
+            return;
+        }
         // check if current Time is able to shoot
         if (CanShoot() && !IsMagazineEmpty()) {
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
@@ -18,11 +25,6 @@ public class SubMachineGun : AmmoGun {
             ResetTimer();
         }
 
-        if (IsMagazineEmpty()) {
-            if (!IsBulletEmpty() && !isReloading) {
-                StartCoroutine(Reload());
-            }
-            return;
-        }
+
     }
 }

@@ -24,12 +24,15 @@ public class UIItem : MonoBehaviour
         reloadCircle.StartLoad();
     }
 
+
     public void UpdateGun(Shooting gun) {
 
         if (gun != null) {
             // Remove old listener
-            if (this.gun != null)
+            if (this.gun != null) {
                 this.gun.OnReload.RemoveListener(TriggerReloadCircle);
+            }
+               
 
             // Set new gun
             this.gun = gun;
@@ -46,6 +49,7 @@ public class UIItem : MonoBehaviour
             UpdateText(newMag, newAmmo);
 
             this.gun.OnReload.AddListener(TriggerReloadCircle);
+            this.gun.onDestroyed.AddListener(reloadCircle.Reset);
         }
         else {
             if (this.gun != null) {

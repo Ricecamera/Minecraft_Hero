@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
     public int level = 0;
     public long score = 0;
     public bool isGameOver = false;
+    public bool isGamePause = false;
 
     // Object References
     private UIManager UImanager;
@@ -78,14 +80,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UImanager = GameObject.Find("UI").GetComponent<UIManager>();
-        Reset();
+        ResetState();
         SpawnPlayer(new Vector3(0, 0, 0));
         NextWave();
         StartCoroutine(SpawnAirDrop());
-    }
-
-    void Update()
-    {
     }
 
 
@@ -118,6 +116,8 @@ public class GameManager : MonoBehaviour
     private void OnPlayerDeath() {
         if (playerLife == 0) {
             print("Game over!!");
+            Time.timeScale = 0f;
+            UImanager.ShowGameOverUI(true);
             isGameOver = true;
             return;
         }
@@ -223,13 +223,38 @@ public class GameManager : MonoBehaviour
         return new Vector3(xPos, 0, zPos);
     }
 
-    public void Reset() {
+    public void ResetState() {
         playerLife = 3;
         currentAirDrop = 0;
         level = 0;
         score = 0;
         isGameOver = false;
+        isGamePause = false;
         UImanager.UpdateScore(score);
         UImanager.UpdateLife(playerLife);
+    }
+
+    public void PauseGame() {
+        UImanager.ShowPauseUI(true);
+        isGamePause = true;
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeGame() {
+        UImanager.ShowPauseUI(false);
+        isGamePause = false;
+        Time.timeScale = 1f;
+    }
+
+    public void ReloadGame() {
+        UImanager.ShowGameOverUI(false);
+        SceneManager.LoadScene("GameScene");
+        Time.timeScale = 1f;
+        ResetState();
+    }
+
+    public void GotoMainMenu() {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }

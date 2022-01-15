@@ -8,14 +8,14 @@ public class UIManager : MonoBehaviour
     [Header("Overlay UI")]
     public Text lifeText;
     public Text scoreText;
-    public Button menuButton;
 
     public Text gunIndexText;
     public UIItem item;
     [Space(10)]
 
     [Header("Game over UI")]
-    public Text gameOverText;
+    public GameObject gameOverUI;
+    public GameObject pauseGameUI;
 
 
     public void UpdateScore(long newScore) {
@@ -33,5 +33,13 @@ public class UIManager : MonoBehaviour
 
     public void UpdateAmmo(int mag, int ammo) {
         item.UpdateText(mag, ammo);
+    }
+
+    public void ShowGameOverUI(bool isShow) {
+        gameOverUI.SetActive(isShow);
+    }
+
+    public void ShowPauseUI(bool isShow) {
+        pauseGameUI.SetActive(isShow);
     }
 }

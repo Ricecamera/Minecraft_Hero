@@ -23,9 +23,6 @@ public class AudioManager : MonoBehaviour {
         else if (instance != this)
             //Destroy this, this enforces our singleton pattern so there can only be one instance of SoundManager.
             Destroy(gameObject);
-
-        //Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
-        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -40,29 +37,28 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void PlaySingle(AudioClip clip) {
-        //Set the clip of our efxSource audio source to the clip passed in as a parameter.
-        efxSources[0].clip = clip;
-
-        //Play the clip.
-        efxSources[0].Play();
+        PlaySingle(0, clip);
     }
 
     //RandomizeSfx chooses randomly between various audio clips and slightly changes their pitch.
     public void RandomizeSfx(params AudioClip[] clips) {
-        int randomIndex = Random.Range(0, clips.Length);
-        float randomPitch = Random.Range(lowPitchRange, highPitchRange);
-
-        efxSources[0].pitch = randomPitch;
-        efxSources[0].clip = clips[randomIndex];
-        efxSources[0].Play();
+        RandomizeSfx(0, clips);
     }
 
     public void RandomizeSfx(int index, params AudioClip[] clips) {
+        if (index > efxSources.Length) return;
+
         int randomIndex = Random.Range(0, clips.Length);
         float randomPitch = Random.Range(lowPitchRange, highPitchRange);
 
         efxSources[index].pitch = randomPitch;
         efxSources[index].clip = clips[randomIndex];
         efxSources[index].Play();
+    }
+
+    public void StopSound(int index) {
+        if (index > efxSources.Length) return;
+
+        efxSources[index].Stop();
     }
 }

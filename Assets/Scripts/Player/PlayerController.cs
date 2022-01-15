@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     public void Reset()
     {
-        myRigidbody.velocity = Vector3.zero;
-        myRigidbody.angularVelocity = Vector3.zero;
+        velocity = Vector3.zero;
+        //myRigidbody.angularVelocity = Vector3.zero;
     }
 }

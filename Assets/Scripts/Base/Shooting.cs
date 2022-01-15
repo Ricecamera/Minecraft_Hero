@@ -34,6 +34,7 @@ public abstract class Shooting : MonoBehaviour
 
     public UnityEvent<int, int> OnShoot;
     public UnityEvent<float> OnReload;
+    public UnityEvent onDestroyed;
 
     public bool IsReloading {
         get {
@@ -69,5 +70,12 @@ public abstract class Shooting : MonoBehaviour
 
     public bool IsMagazineEmpty() {
         return currentMagazine == 0;
+    }
+
+    private void OnDestroy() {
+        onDestroyed?.Invoke();
+        onDestroyed.RemoveAllListeners();
+        StopCoroutine(Reload());
+        AudioManager.instance.StopSound(1);
     }
 }

@@ -22,6 +22,14 @@ public class RocketLauncher : AmmoGun
     }
 
     public override void Shoot() {
+
+        if (IsMagazineEmpty() && gameObject) {
+            if (!IsBulletEmpty() && !isReloading) {
+                StartCoroutine(Reload());
+            }
+            return;
+        }
+
         // check if current Time is able to shoot
         if (CanShoot() && !IsMagazineEmpty()) {
             AudioManager.instance.PlaySingle(fireSound);
@@ -31,13 +39,6 @@ public class RocketLauncher : AmmoGun
             currentMagazine--;
             OnShoot?.Invoke(currentMagazine, reserveAmmo);
             ResetTimer();
-        }
-
-        if (IsMagazineEmpty()) {
-            if (!IsBulletEmpty() && !isReloading) {
-                StartCoroutine(Reload());
-            }
-            return;
         }
     }
 

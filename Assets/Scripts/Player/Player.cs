@@ -40,14 +40,15 @@ public class Player : LivingEntity {
         sceneCamera = Camera.main;
 
         playerAnim = playerAvatar.GetComponent<Animator>();
-        StartCoroutine(SetInvincible());
+        StartCoroutine(SetInvincible(invicibleTime*2));
     }
 
     // Update is called once per frame
     private void Update()
     {
         bool isGameOver = GameManager.instance.isGameOver;
-        if (!dead && !isGameOver) {
+        bool isGamePause = GameManager.instance.isGamePause;
+        if (!(dead | isGameOver | isGamePause)) {
             // Change 2d input vector to 3d vector;
             Vector3 moveDirection = new Vector3(_input.inputVector.x, 0, _input.inputVector.y);
             Vector3 moveVelocity = moveDirection.normalized * movementSpeed;
@@ -81,7 +82,7 @@ public class Player : LivingEntity {
         }
     }
 
-    IEnumerator SetInvincible() {
+    IEnumerator SetInvincible(float invicibleTime) {
         // To Do: trigger invincible effect
         invincibleIndicator.SetActive(true);
         isInvincible = true;
@@ -91,6 +92,8 @@ public class Player : LivingEntity {
     }
 
     public override void Die(float delay) {
+        controller.Reset();
+        gunController.DropCurrentGun();
         playerAnim.SetBool("Death_b", true);
         base.Die(delay);
     }
@@ -107,7 +110,7 @@ public class Player : LivingEntity {
             Die(dealthDelay);
         }
         else {
-            StartCoroutine(SetInvincible());
+            StartCoroutine(SetInvincible(invicibleTime));
         }
     }
 

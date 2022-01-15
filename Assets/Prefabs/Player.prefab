@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d859d0a9ed002c048844d096fd7cdb24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 3
+  startingHealth: 5
   maxHealth: 10
   deathDelay: 0.75
   OnDeath:
@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnim: {fileID: 7815425472485128260}
+  crossHair: {fileID: 0}
   weaponHolds:
   - {fileID: 7815425472631310835}
   - {fileID: 8386301352511114436}
@@ -241,7 +242,6 @@ MonoBehaviour:
   - {fileID: 0}
   startingGun: {fileID: 6460219562675884818, guid: a2317e9b1b36dd143bb02af8ed2dc539,
     type: 3}
-  crossHair: {fileID: 0}
 --- !u!1001 &5398118716658729807
 PrefabInstance:
   m_ObjectHideFlags: 0

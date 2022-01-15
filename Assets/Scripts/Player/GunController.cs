@@ -12,14 +12,13 @@ public class GunController : MonoBehaviour
 
     private UIManager UImanager;
 
-    
-
     public Animator playerAnim;
+    public Transform crossHair;
     public Transform[] weaponHolds;
     public List<Shooting> weaponInventory;
 
     public Shooting startingGun;
-    public Transform crossHair;
+    
 
     void Start()
     {
@@ -35,11 +34,10 @@ public class GunController : MonoBehaviour
 
     public void UpdateCrossHair(Vector3 target) {
         Shooting equippedGun = weaponInventory[equippedGunIdx];
-        target.y = equippedGun.transform.position.y;
         
-
         if (equippedGun != null) {
             float distance = (target - equippedGun.transform.position).magnitude * 0.9f;
+            target.y = equippedGun.transform.position.y;
             Vector3 newCrossHairPos = equippedGun.transform.position + equippedGun.transform.forward * distance;
             crossHair.position = newCrossHairPos;
         }
@@ -85,7 +83,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    private void DropCurrentGun(int toDropIdx) {
+    private void DropGun(int toDropIdx) {
         // Destroy gameObject
         Shooting equippedGun = weaponInventory[equippedGunIdx];
         weaponInventory[equippedGunIdx].OnShoot.RemoveListener(UImanager.UpdateAmmo);
@@ -102,7 +100,13 @@ public class GunController : MonoBehaviour
         // Set current gun to pistol
         equippedGunIdx = selectIdx = 0;
         UImanager.UpdateGun(weaponInventory[0], 1);
-        EquipGun(0);
+
+        if (weaponInventory[0] != null) 
+            EquipGun(0);
+    }
+
+    public void DropCurrentGun() {
+        DropGun(equippedGunIdx);
     }
 
     public void Shoot() {
@@ -111,7 +115,7 @@ public class GunController : MonoBehaviour
             equippedGun.Shoot();
             AmmoGun ammoGun = equippedGun as AmmoGun;
             if (ammoGun != null && ammoGun.IsBulletEmpty()) {
-                DropCurrentGun(equippedGunIdx);
+                DropGun(equippedGunIdx);
             }
 
             UImanager.UpdateGun(equippedGun, equippedGunIdx+1);
