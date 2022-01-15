@@ -39,7 +39,7 @@ public class Wave
 public class GameManager : MonoBehaviour
 {
     private static int MAX_PLAYER_LIFE = 10;
-    private static int MAX_AIRDROPS = 20;
+    private static int MAX_AIRDROPS = 4;
     private static float AIRDROP_STARTING_Y = 50f;
 
     public static GameManager instance = null;    // static instance of GameManager which allows it to be accessed by any other script.
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     private int playerLife = 3;
     private int currentAirDrop = 0;
     public float playerSpawnDelay = 3f;
-    public float airDropSpawnTime = 5f;
+    public float airDropSpawnTime = 10f;
     public int level = 0;
     public long score = 0;
     public bool isGameOver = false;
@@ -254,6 +254,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void GotoMainMenu() {
+        Destroy(AudioManager.instance.gameObject);
+        Destroy(EnemySoundManager.instance.gameObject);
+        Destroy(Randomizer.instance.gameObject);
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
