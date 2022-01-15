@@ -108,7 +108,7 @@ public class Zombie : LivingEntity {
     }
 
     IEnumerator Chasing() {
-        float chasingDelay = 1f;
+        float chasingDelay = .5f;
 
         yield return new WaitForSeconds(chasingDelay);
         currentState = State.Chasing;

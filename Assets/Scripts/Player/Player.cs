@@ -40,7 +40,7 @@ public class Player : LivingEntity {
         sceneCamera = Camera.main;
 
         playerAnim = playerAvatar.GetComponent<Animator>();
-        StartCoroutine(SetInvincible(invicibleTime*2));
+        StartCoroutine(SetInvincible(invicibleTime));
     }
 
     // Update is called once per frame
@@ -108,9 +108,6 @@ public class Player : LivingEntity {
         if (health <= 0 && !dead) {
             float dealthDelay = 1.5f;
             Die(dealthDelay);
-        }
-        else {
-            StartCoroutine(SetInvincible(invicibleTime));
         }
     }
 

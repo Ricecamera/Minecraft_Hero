@@ -39,7 +39,14 @@ public class Randomizer : MonoBehaviour
     }
 
     public Item getRandomItem() {
-        int randIdx = Random.Range(0, containItems.Count);
-        return containItems[randIdx];
+        float value = Random.Range(0f, 1f);
+        int randIndex = 0;
+        if (value > 0.8f) {
+            randIndex = 1;
+        }
+        if (value > 0.5f) {
+            randIndex = 2;
+        }
+        return containItems[randIndex];
     }
 }
