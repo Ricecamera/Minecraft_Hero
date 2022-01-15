@@ -66,8 +66,9 @@ public class GunController : MonoBehaviour
         // Add listener to the new gun
         equippedGunIdx = index;
         weaponInventory[index].OnShoot.AddListener(UImanager.UpdateAmmo);
+        UImanager.UpdateGun(weaponInventory[index], index + 1);
 
-        
+
         var gunId = weaponInventory[index].gunId;
         if (gunId == 1) {
             playerAnim.SetInteger("WeaponType_int", 2);
@@ -148,6 +149,7 @@ public class GunController : MonoBehaviour
                 if (weaponInventory[foundIdx] is AmmoGun) {
                     AmmoGun temp = weaponInventory[foundIdx] as AmmoGun;
                     temp.SetFullAmmo();
+                    
                 }
             }
             else {
@@ -155,11 +157,10 @@ public class GunController : MonoBehaviour
                 currentGuns++;
             }
 
-            if (selectIdx == (currentGuns - 1) || (selectIdx != -1 && selectIdx == foundIdx)) {
+            if (selectIdx == (currentGuns - 1)) {
                 // Remove listener from the old gun
                 weaponInventory[equippedGunIdx].OnShoot.RemoveListener(UImanager.UpdateAmmo);
                 // Equip the new gun
-                UImanager.UpdateGun(weaponInventory[selectIdx], selectIdx + 1);
                 EquipGun(selectIdx);
             }
                 
@@ -181,8 +182,10 @@ public class GunController : MonoBehaviour
             newIdx = MAX_GUN - 1;
 
         selectIdx = newIdx;
-        UImanager.UpdateGun(weaponInventory[selectIdx], selectIdx + 1);
         if (weaponInventory[selectIdx] != null)
             EquipGun(selectIdx);
+        else {
+            UImanager.UpdateGun(weaponInventory[selectIdx], selectIdx + 1);
+        }
     }
 }

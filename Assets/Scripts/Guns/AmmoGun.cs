@@ -48,5 +48,6 @@ public abstract class AmmoGun : Shooting {
     public void SetFullAmmo() {
         currentMagazine = magazineSize;
         reserveAmmo = totalAmmo - magazineSize;
+        OnShoot?.Invoke(currentMagazine, reserveAmmo);
     }
 }
