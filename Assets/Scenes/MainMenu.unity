@@ -1423,7 +1423,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: MINECRAFT HERO
+  m_Text: STEVE vs ZOMBIES
 --- !u!222 &933429604
 CanvasRenderer:
   m_ObjectHideFlags: 0
