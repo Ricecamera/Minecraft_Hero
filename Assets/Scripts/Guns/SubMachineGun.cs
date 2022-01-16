@@ -21,7 +21,7 @@ public class SubMachineGun : AmmoGun {
             // reduce bullets in magazine by one
             currentMagazine--;
             OnShoot?.Invoke(currentMagazine, reserveAmmo);
-            AudioManager.instance.PlaySingle(fireSound);
+            AudioManager.instance?.PlaySingle(fireSound);
             ResetTimer();
         }
 

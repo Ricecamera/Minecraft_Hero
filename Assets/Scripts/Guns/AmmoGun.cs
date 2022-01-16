@@ -26,7 +26,7 @@ public abstract class AmmoGun : Shooting {
         // Prevent this IEnumerator from called multiple time
         isReloading = true;
         OnReload?.Invoke(reloadTime);
-        AudioManager.instance.PlaySingle(1, reloadSound);
+        AudioManager.instance?.PlaySingle(1, reloadSound);
         yield return new WaitForSeconds(reloadTime);
         if (reserveAmmo >= magazineSize) {
             currentMagazine = magazineSize;

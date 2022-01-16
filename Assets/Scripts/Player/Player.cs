@@ -73,11 +73,11 @@ public class Player : LivingEntity {
 
             if (_input.Q) {
                 gunController.ChangeGun(-1);
-                AudioManager.instance.PlaySingle(1, weaponPickupSound);
+                AudioManager.instance?.PlaySingle(1, weaponPickupSound);
             }
             else if (_input.E) {
                 gunController.ChangeGun(1);
-                AudioManager.instance.PlaySingle(1, weaponPickupSound);
+                AudioManager.instance?.PlaySingle(1, weaponPickupSound);
             }
         }
     }
@@ -101,7 +101,7 @@ public class Player : LivingEntity {
     public override void TakeDamage(float damage) {
         
         if (!isInvincible) {
-            AudioManager.instance.PlaySingle(hurtSound);
+            AudioManager.instance?.PlaySingle(hurtSound);
             health -= damage;
         }
         
@@ -116,18 +116,18 @@ public class Player : LivingEntity {
             HeathPotion potion = item as HeathPotion;
             float newHeath = health += potion.HealAmount;
             setHealth(newHeath);
-            AudioManager.instance.PlaySingle(2, drinkingSound);
+            AudioManager.instance?.PlaySingle(2, drinkingSound);
         }
         else if (item.CompareTag("LifeUP")) {
             float newHeath = maxHealth;
             setHealth(newHeath);
             GameManager.instance.IncresePlayerLife(1);
-            AudioManager.instance.PlaySingle(2, lifeUpSound);
+            AudioManager.instance?.PlaySingle(2, lifeUpSound);
         }
         else if (item.CompareTag("WeaponDrop")){
             AmmoGun selectedGun = Randomizer.instance.getRandomGun();
             gunController.AddGun(selectedGun);
-            AudioManager.instance.PlaySingle(2, weaponPickupSound);
+            AudioManager.instance?.PlaySingle(2, weaponPickupSound);
         }
         return;
     }

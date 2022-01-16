@@ -76,6 +76,6 @@ public abstract class Shooting : MonoBehaviour
         onDestroyed?.Invoke();
         onDestroyed.RemoveAllListeners();
         StopCoroutine(Reload());
-        AudioManager.instance.StopSound(1);
+        AudioManager.instance?.StopSound(1);
     }
 }

@@ -54,7 +54,7 @@ public class Shotgun : AmmoGun
 
         // check if current Time is able to shoot
         if (CanShoot() && !IsMagazineEmpty()) {
-            AudioManager.instance.PlaySingle(fireSound);
+            AudioManager.instance?.PlaySingle(fireSound);
             FireBullets();
 
             // reduce bullets in magazine by one

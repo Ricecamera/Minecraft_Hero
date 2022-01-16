@@ -24,7 +24,7 @@ public class Rocket : Bullet
             Collider[] initialCollisions = Physics.OverlapSphere(transform.position, .2f, collisionMask);
             if (Physics.Raycast(ray, out RaycastHit hit, moveDistance + skinWidth, collisionMask) && !isExplosing ||
                 initialCollisions.Length > 0) {
-                AudioManager.instance.PlaySingle(explosionSound);
+                AudioManager.instance?.PlaySingle(explosionSound);
                 isExplosing = true;
                 Instantiate(exposionVfx, transform.position, Quaternion.identity);
                 this.Speed = 0.2f;

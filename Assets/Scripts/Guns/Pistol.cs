@@ -19,7 +19,7 @@ public class Pistol : Shooting
 
         // check if current Time is able to shoot
         if (CanShoot()) {
-            AudioManager.instance.PlaySingle(fireSound);
+            AudioManager.instance?.PlaySingle(fireSound);
             Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             bullet.Speed = muzzleVelocity;
 
@@ -36,7 +36,7 @@ public class Pistol : Shooting
         // Prevent this IEnumerator from called multiple time
         isReloading = true;
         OnReload?.Invoke(reloadTime);
-        AudioManager.instance.PlaySingle(1, reloadSound);
+        AudioManager.instance?.PlaySingle(1, reloadSound);
         yield return new WaitForSeconds(reloadTime);
         currentMagazine = magazineSize;
         OnShoot?.Invoke(currentMagazine, -1);
