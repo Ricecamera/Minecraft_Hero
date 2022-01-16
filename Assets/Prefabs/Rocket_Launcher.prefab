@@ -115,6 +115,9 @@ MonoBehaviour:
   OnReload:
     m_PersistentCalls:
       m_Calls: []
+  onDestroyed:
+    m_PersistentCalls:
+      m_Calls: []
   totalAmmo: 8
   reserveAmmo: 0
 --- !u!1 &7424268092342606765
